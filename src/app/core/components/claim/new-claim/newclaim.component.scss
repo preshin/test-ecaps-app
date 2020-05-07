@@ -1,0 +1,27 @@
+.claim-category-select-wrapper {
+  .mat-form-field {
+    width: 100%;
+  }
+  .enviar-select-wrapper {
+    border-radius: 5px;
+  }
+}
+
+input::placeholder {
+  /* Firefox, Chrome, Opera */
+  padding-left: 10px;
+}
+
+.enviar-textarea-wrapper {
+  textarea {
+    background: white;
+    resize: none;
+    border-radius: 5px;
+    height: 80px;
+  }
+  textarea::placeholder {
+    /* Firefox, Chrome, Opera */
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+}

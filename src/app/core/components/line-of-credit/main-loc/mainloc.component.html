@@ -1,0 +1,92 @@
+<div style="padding: 10px">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header style="border-bottom: 1px solid lightgrey;">
+        <h4><b>Loan #1</b></h4>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="1" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="full-width">
+            <div class="mat-small">Start Date</div>
+            <div><b>1st Nov 2019</b></div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="full-width">
+            <div class="mat-small">
+              Credit Taken (Principal Amount)
+              <mat-icon matTooltip="Amount availed for the Loan">
+                help_outline
+              </mat-icon>
+            </div>
+            <div>
+              <b>{{ 75000 | number }}</b>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="full-width">
+            <div class="mat-small">
+              Interest Accured till date
+              <mat-icon matTooltip="Interest for the availed loan amount.">
+                help_outline
+              </mat-icon>
+            </div>
+            <div>
+              <b>{{ 10500 | number }} @{{ 14 }}% per day</b>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="2" rowHeight="30px" [gutterSize]="'10px'">
+        <mat-grid-tile colspan="1" rowspan="2">
+          <button
+            mat-raised-button
+            color="primary"
+            class="full-width secondary"
+            [routerLink]="['/', 'loc']"
+          >
+            View Statement
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="2">
+          <button
+            mat-raised-button
+            color="primary"
+            class="full-width"
+            [routerLink]="['/', 'loc-repay']"
+          >
+            Repay
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br />
+  <mat-card style="background-color: black; color: white;">
+    <mat-card-header>
+      <mat-card-title>Top Up Available</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list cols="4" rowHeight="30px">
+        <mat-grid-tile [colspan]="3" [rowspan]="2">
+          Congratulations! You are eligable for an additional line of credit for
+          an amount of upto
+        </mat-grid-tile>
+        <mat-grid-tile
+          [colspan]="1"
+          [rowspan]="3"
+          [routerLink]="['/', 'take-credit']"
+        >
+          <div class="mat-card-round-small">
+            <mat-icon style="color: black;">arrow_forward</mat-icon>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+          <div class="full-width">&#8377; {{ 25000 | number }}</div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>

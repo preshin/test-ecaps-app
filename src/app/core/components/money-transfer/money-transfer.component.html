@@ -1,0 +1,86 @@
+<div class="p-10-30">
+  <!-- <mat-card class="blue-border-card"> -->
+    <div class="text-center">
+        <h3 class="primary-color">Transfer Money</h3>
+        <form [formGroup]="inputForm"> 
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label class="primary-color">Beneficiary Name</mat-label>
+            <input matInput formControlName="beneficiaryName">
+            <mat-error>Enter a valid beneficiary name.</mat-error>  
+        </mat-form-field>  
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Beneficiary Account Number</mat-label>
+            <input matInput formControlName="accountNumber"> 
+            <mat-error>Enter a valid account no.</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Beneficiary IFSC Code</mat-label>
+            <input matInput formControlName="ifc">
+            <!-- <button mat-button matSuffix (click)="checkIfsc()">Verify</button> -->
+            <mat-error>Enter a valid ifsc code.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Beneficiary Mobile Number</mat-label>
+            <input matInput formControlName="beneficiaryMobile"> 
+            <mat-error>Enter a valid 10 digit mobile number.</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Beneficiary Email</mat-label>
+            <input matInput formControlName="beneficiaryEmail"> 
+            <mat-error>Enter a valid email.</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label class="primary-color">Bank Account Type</mat-label>
+            <mat-select [formControl]="bankAccountType">
+              <mat-option value="savings">Savings</mat-option>
+              <mat-option value="fixed">Fixed</mat-option>
+            </mat-select>
+          </mat-form-field> 
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Bank Name</mat-label>
+            <input matInput formControlName="bankName"> 
+            <mat-error>Enter a valid bank name.</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Bank Branch Name</mat-label>
+            <input matInput formControlName="bankBranch"> 
+            <mat-error>Enter a valid bank branch name.</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Amount</mat-label>
+            <input matInput formControlName="amount"> 
+            <mat-error>Enter a valid amount.</mat-error>
+        </mat-form-field>
+        <p>Sender Details</p>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label class="primary-color">Sender Name</mat-label>
+            <input matInput formControlName="senderName">
+            <mat-error>Enter a valid sender name.</mat-error>  
+        </mat-form-field>
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Sender Mobile Number</mat-label>
+            <input matInput formControlName="senderMobile"> 
+            <mat-error>Enter a valid 10 digit mobile number.</mat-error>
+        </mat-form-field> 
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Sender Email</mat-label>
+            <input matInput formControlName="senderEmail"> 
+            <mat-error>Enter a valid email.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline"  class="full-width">
+            <mat-label class="primary-color">Additional Amount</mat-label>
+            <input matInput formControlName="additionalAmount"> 
+            <mat-error>Enter a valid additional amount.</mat-error>
+        </mat-form-field>
+        </form>  
+        <br>   
+        <button 
+        mat-raised-button 
+        class="full-width"
+        color="primary" 
+        [disabled]="!inputForm.valid"
+        (click)="submit()"
+        >Continue</button>     
+    </div>        
+  <!-- </mat-card> -->
+</div> 

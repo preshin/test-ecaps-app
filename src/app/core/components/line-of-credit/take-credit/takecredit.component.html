@@ -1,0 +1,85 @@
+<div style="padding: 10px">
+  <mat-card class="text-center">
+    <mat-card-header>
+      <mat-card-title><b>How much credit you want?</b></mat-card-title>
+      <mat-card-subtitle
+        >Drag the slider to increase amount. You are preapproved for a maximum
+        credit of INR 1,00,000.</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <h4>Credit Amount</h4>
+        <b>&#8377; {{ amount | number }}</b>
+        <div>
+          <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            min="0"
+            max="100000"
+            step="5000"
+            (input)="onInputChange($event)"
+            style="width: 80%;"
+          ></mat-slider>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <br />
+  <mat-card class="bg-transp" style="box-shadow: none;">
+    <mat-card-header>
+      <mat-card-title>Interest Calculation:</mat-card-title>
+      <mat-card-subtitle
+        >View Interest Calculations on your selected amount:</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="100px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-card class="bg-transp">
+            <div>
+              <div class="mat-small">Monthly interest</div>
+              <div>
+                <b>{{ monthlyInterest }}%</b>
+              </div>
+            </div>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-card class="bg-transp">
+            <div>
+              <div class="mat-small">Monthly interest Amt.</div>
+              <div>
+                <b>&#8377; {{ interestAmount | number }}</b>
+              </div>
+            </div>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-checkbox>Auto Debit Interest Payments from my A/C</mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+  <mat-grid-list cols="2" rowHeight="30px" [gutterSize]="'10px'">
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width secondary"
+        [routerLink]="['/', 'loc']"
+      >
+        Cancel
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width"
+        [routerLink]="['/', 'credit-confirm']"
+      >
+        Next
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

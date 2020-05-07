@@ -1,0 +1,159 @@
+<app-navigation-bar (toggleSidenav)="navigationSidenav.toggle()">
+</app-navigation-bar>
+
+<mat-sidenav-container autosize>
+  <mat-sidenav #navigationSidenav mode="over" role="navigation">
+    <!-- <mat-toolbar>
+      <mat-toolbar-row>
+        <h2 class="toolbar-title">Enviar</h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div style="height:30px"></div> -->
+    <!-- <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Hey,</mat-card-title>
+      <mat-card-subtitle>Retailer Name</mat-card-subtitle>
+    </mat-card-header> -->
+    <mat-nav-list>
+      <ng-container> 
+
+        <!-- <a mat-list-item routerLink="/" style="height: 0;"></a>
+        <a
+          mat-list-item
+          (click)="navigationSidenav.close()" 
+        >
+          <mat-icon matListIcon class="nav-list-icon">
+            redeem
+          </mat-icon> 
+           Redeem Points
+        </a>
+        <a
+          mat-list-item
+          (click)="navigationSidenav.close()" 
+        >
+          <mat-icon matListIcon class="nav-list-icon">
+            swap_horizontal_circle
+          </mat-icon> 
+          Payment Gateways 
+        </a>
+        <a
+          mat-list-item
+          (click)="navigationSidenav.close()" 
+        >
+          <mat-icon matListIcon class="nav-list-icon">
+            settings
+          </mat-icon> 
+          Settings
+        </a>
+        <a
+          mat-list-item
+          (click)="navigationSidenav.close()"
+        >
+          <mat-icon matListIcon class="nav-list-icon">
+            info
+          </mat-icon> 
+          About
+        </a>
+
+        <mat-divider></mat-divider> -->
+        <mat-toolbar>
+          <mat-toolbar-row>
+            <div class="full-width hamburger-menu-close">
+              <!-- <img
+                src="assets/images/close.svg"
+                alt="icon"
+                (click)="navigationSidenav.close()"
+              /> -->
+              <mat-icon (click)="navigationSidenav.close()">close</mat-icon>
+            </div>
+          </mat-toolbar-row>
+          <mat-toolbar-row class="header-3 color-very-dark-blue">
+            Menu
+          </mat-toolbar-row>
+          <mat-toolbar-row
+            *ngFor="let hamMenu of hamburgerMenu"
+            class="header-5 color-white"
+            [routerLink]="['/', hamMenu.route]"
+            (click)="navigationSidenav.close()"
+          >
+            {{ hamMenu.text }}
+          </mat-toolbar-row>
+          <mat-toolbar-row
+            class="header-5 color-white"
+            (click)="navigationSidenav.close(); logout()"
+          >
+            Sign Out
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </ng-container>
+
+      <ng-container *ngIf="customerRoutes">
+        <!-- <h2 matSubheader> {{ 'CUSTOMERS' | translate }} </h2>
+
+        <a *ngFor="let item of customerRoutes"
+           mat-list-item
+           (click)="navigationSidenav.close()"
+           [routerLink]="[item.route]"
+           routerLinkActive="list-item-active">
+          <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
+          {{item.title}}
+        </a> -->
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- <mat-sidenav #commandbarSidenav position="end" mode="side">
+    <mat-list style="padding: 10px;">
+      <mat-card
+        *ngFor="let item of toolPaletteItems"
+        style="padding: 8px; margin-bottom: 10px; text-align: center;"
+      >
+        <img
+          mat-card-sm-image
+          [src]="item.icon"
+          [alt]="item.name"
+          draggable="true"
+          (dragstart)="onDragStart($event, item.id)"
+        />
+
+        <mat-card-content>
+          <mat-card-subtitle>
+            {{ item.name }}
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </mat-list>
+  </mat-sidenav> -->
+
+  <mat-sidenav-content role="main"
+  [ngClass]="showFooterMenu ? 'with-footer' : 'without-footer'"
+  >
+    <!--
+    <crm-navigation-bar *ngIf="isAuthenticated()" (toggleSidenav)="navigationSidenav.toggle()">
+    </crm-navigation-bar>
+    -->
+    <router-outlet></router-outlet>
+    <ngx-spinner color="#27878e"></ngx-spinner>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<footer class="footer" *ngIf="showFooterMenu">
+  <mat-grid-list cols="5" rowHeight="64px" style="width: 100%;">
+    <mat-grid-tile
+      *ngFor="let menu of menuLists"
+      [colspan]="menu.cols"
+      [rowspan]="menu.rows"
+      [routerLink]="['/', menu.route]"
+      [ngStyle]="{ 'pointer-events': menu.isDisabled }"
+      [ngClass]="menu.isSelected ? 'menu-selected' : 'menu-not-selected'"
+      (click)="navigationSidenav.close()"
+    >
+      <div>
+        <div>
+          <mat-icon class="drag-handler">{{ menu.icon }}</mat-icon>
+        </div>
+        <div>{{ menu.text }}</div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</footer>

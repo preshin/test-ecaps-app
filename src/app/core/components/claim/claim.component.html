@@ -1,0 +1,116 @@
+<div style="padding: 10px;">
+  <mat-grid-list cols="2" rowHeight="150px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card style="width: 100%">
+        <mat-grid-list cols="3" rowHeight="80px" class="full-width">
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="mat-card-round-small" style="height:40px; width: 40px;">
+              <mat-icon style="font-size: 20px">shopping_cart</mat-icon>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2" rowspan="1">
+            <div>
+              <div>Food</div>
+              <b>&#8377; 1,234</b>
+              <div class="mat-small">29 Oct 2019</div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card style="width: 100%">
+        <mat-grid-list cols="3" rowHeight="80px" class="full-width">
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="mat-card-round-small" style="height:40px; width: 40px;">
+              <mat-icon style="font-size: 20px">shopping_cart</mat-icon>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2" rowspan="1">
+            <div>
+              <div>Fuel</div>
+              <b>&#8377; 1,234</b>
+              <div class="mat-small">29 Oct 2019</div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<mat-grid-list cols="2" rowHeight="50px" style="background-color: lightgrey">
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1"
+    [ngClass]="claimTabBorder"
+    (click)="toggleTab()"
+  >
+    <h4><b>Current Claims</b></h4>
+  </mat-grid-tile>
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1"
+    [ngClass]="pastTabBorder"
+    (click)="toggleTab()"
+  >
+    <h4><b>Past Claims</b></h4>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="9" rowHeight="30px" class="mat-body-1">
+  <mat-grid-tile
+    *ngFor="let header of headings"
+    [colspan]="header.cols"
+    [rowspan]="header.rows"
+  >
+    <b>{{ header.text }}</b>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="1" rowHeight="60px" class="mat-body-1">
+  <mat-grid-tile
+    *ngFor="let claim of claimsList"
+    [colspan]="claim.cols"
+    [rowspan]="claim.rows"
+    [routerLink]="['/', 'claim-details']"
+  >
+    <mat-grid-list
+      cols="9"
+      rowHeight="60px"
+      style="width: 100%;
+            background: white;
+            border-bottom: 1px solid lightgray;"
+    >
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div style="color:lightgrey;">{{ claim.date | date: "dd MMM" }}</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div>&#8377; {{ claim.amount | number }}</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div>{{ claim.type }}</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1" style="color:lightgrey;">
+        <div>{{ claim.status }}</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <div style="margin-top: 10px; color:lightgrey;">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-grid-tile>
+</mat-grid-list>
+<br />
+<div class="full-width text-center" style="padding: 10px 0">
+  <button
+    mat-raised-button
+    color="primary"
+    class="full-width"
+    [routerLink]="['/', 'new-claim']"
+    style="width: 75%"
+  >
+    <mat-icon style="color:white;">add_circle</mat-icon>
+    New Claim
+  </button>
+</div>

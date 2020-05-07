@@ -1,0 +1,63 @@
+<ng-container *ngIf="showHeaderNavBar; else noNavBar">
+<mat-toolbar color="primary" style="height: 10vh">
+  <ng-container *ngIf="!showBackButton; else backButton">
+    <mat-toolbar-row style="height: 100%">
+      <div class="full-width">
+        <button mat-icon-button (click)="toggleSidenav.emit()">
+          <!-- <img src="assets/images/menu-icon.svg" alt="icon" /> -->
+          <mat-icon class="menu-icon">menu</mat-icon>
+        </button>
+
+        <img
+          src="assets\images\enviar.png"
+          alt="logo"
+          class="logo"
+        />
+      </div>
+    </mat-toolbar-row>
+  </ng-container>
+  <ng-template #backButton>
+    <mat-toolbar-row style="height: 100%">
+      <button mat-icon-button (click)="backClicked()">
+        <mat-icon class="menu-icon">arrow_back</mat-icon>
+      </button>
+  
+      <!-- <span class="toolbar-title">
+        <img src="assets\images\enviar.png" style="width: 90px;height: auto;">
+        </span> -->
+    </mat-toolbar-row>
+    
+  </ng-template>
+  
+  <!-- <mat-toolbar-row style="height: 100%">
+    <button mat-icon-button (click)="toggleSidenav.emit()">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+
+    <span class="toolbar-title">
+      <img src="assets\images\enviar.png" style="width: 90px;height: auto;">
+      </span>
+
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+      <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+        <li>
+          <button mat-icon-button [matMenuTriggerFor]="auth">
+            <mat-icon>person_outline</mat-icon>
+          </button>
+          <mat-menu #auth="matMenu">
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Sign out</span>
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row> -->
+</mat-toolbar>
+</ng-container>
+<ng-template #noNavBar>
+  <mat-toolbar color="primary" style="height: 10vh">
+    <mat-toolbar-row style="height: 100%"></mat-toolbar-row>
+  </mat-toolbar>
+</ng-template>

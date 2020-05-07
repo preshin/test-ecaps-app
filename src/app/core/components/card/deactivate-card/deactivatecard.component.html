@@ -1,0 +1,31 @@
+<div style="padding:10px">
+  <div>
+    <h3>Would you like to temporarily deactivate your card?</h3>
+    <p style="font-size: 13px; color:lightgrey;">
+      You can reactivate your card at anytime.
+    </p>
+  </div>
+  <br />
+  <mat-grid-list cols="2" rowHeight="30px" [gutterSize]="'10px'">
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width edit"
+        [routerLink]="['/', 'cards']"
+      >
+        Cancel
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width"
+        [routerLink]="['/', 'cards']"
+      >
+        Submit
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,397 @@
+@import "~@angular/material/theming";
+
+@import "../fonts";
+@import "../icons";
+@import "../../../projects/utils/src/lib/angular-material/mat-variables";
+@import "./mixins";
+@import "./palette";
+@import "./typography";
+@import "../../../projects/utils/src/lib/angular-material/variables";
+
+// Generate Material’s core styles
+
+@include mat-core($custom-typography);
+// @include mat-toolbar-typography($custom-toolbar-typography);
+
+// Generate a Custom Theme
+
+$light-theme: mat-light-theme(
+  $light-theme-primary,
+  $light-theme-accent,
+  $light-theme-warn
+);
+// $dark-theme: mat-dark-theme($dark-theme-primary, $dark-theme-accent, $dark-theme-warn);
+
+@include angular-material-theme($light-theme);
+
+// Theme Custom components
+
+@include crm-light-theme($light-theme);
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+$foreground: map-get($light-theme, foreground);
+$background: map-get($light-theme, background);
+
+// top, right, bottom, and left
+// width: 100vw;
+// height: 100vh;
+
+.mat-sidenav-container {
+  // height: 100vh;
+  height: 80vh;
+}
+
+// https://github.com/angular/material2/blob/master/src/lib/core/style/_variables.scss
+
+$sidenav-width: 320px; // 240px;
+
+.mat-sidenav {
+  width: $sidenav-width;
+}
+
+.mat-subheader {
+  font-size: 18px !important;
+  font-weight: 900 !important;
+}
+
+.mat-vertical-content {
+  padding: 24px 24px 24px 24px !important;
+}
+
+// auth-local - login, register
+
+.mat-drawer-container {
+  @media ($mat-xsmall) {
+    background-color: white;
+  }
+}
+
+.mat-header-row {
+  // background-color: mat-color($light-theme-accent, 300);
+  background-color: #f5f5f5;
+}
+
+.mat-footer-row {
+  // background-color: mat-color($light-theme-accent, 300);
+  background-color: #f5f5f5;
+}
+
+.mat-drawer-content {
+  background-color: white;
+}
+
+.blue-border-card {
+  border: solid 1px #2a0055 !important;
+  background: white !important;
+  color: black !important;
+}
+
+.payment-card {
+  background: #2a0055;
+  background: -webkit-linear-gradient(135deg, #2a0055 0%, #292163 100%);
+  background: linear-gradient(135deg, #2a0055 0%, #292163 100%);
+  color: white;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  color: white;
+  background-color: #2a2265;
+  border: solid 2px #2a2265;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: center;
+  box-shadow: 0px 20px 15px -10px rgba(42, 34, 101, 0.6),
+    0 20px 15px -10px rgba(173, 172, 172, 0.5) !important;
+}
+
+.mat-flat-button.mat-primary[disabled],
+.mat-flat-button.mat-accent[disabled],
+.mat-flat-button.mat-warn[disabled],
+.mat-flat-button[disabled][disabled],
+.mat-raised-button.mat-primary[disabled],
+.mat-raised-button.mat-accent[disabled],
+.mat-raised-button.mat-warn[disabled],
+.mat-raised-button[disabled][disabled],
+.mat-fab.mat-primary[disabled],
+.mat-fab.mat-accent[disabled],
+.mat-fab.mat-warn[disabled],
+.mat-fab[disabled][disabled],
+.mat-mini-fab.mat-primary[disabled],
+.mat-mini-fab.mat-accent[disabled],
+.mat-mini-fab.mat-warn[disabled],
+.mat-mini-fab[disabled][disabled] {
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 20px 15px -10px #f2f2f2,
+    0px 20px 15px -10px rgba(173, 172, 172, 0.5) !important;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 12px;
+  font-weight: bold; 
+}
+.primary-color {
+  color: #2a0055;
+}
+
+.bg-white {
+  background: white;
+}
+
+.bg-off-white {
+  background: #fdfffc;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.pad-10-10 {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.pad-2-2 {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.mat-card-round-big {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: white;
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;
+}
+
+.mat-card-round-small {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: #f4f4f4;
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;
+}
+
+.mat-toolbar-row {
+  background-color: white;
+}
+
+.grid-list-flex {
+  display: flex;
+}
+
+.grid-list-flex .left {
+  margin-right: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.no-shadow {
+  -webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.div-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enviar-input-wrapper {
+  input {
+    width: 95%;
+    padding-left: 10px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid #2a0055;
+    font-size: 15px;
+    background-color: white;
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  // background: rgba(0, 255, 255, 0.5);
+  background: transparent;
+  border: 0px;
+}
+
+.enviar-form .mat-select {
+  background-color: white;
+}
+
+.enviar-form .mat-option {
+  background-color: white;
+}
+
+.enviar-form .enviar-select-wrapper {
+  padding: 10px;
+  background-color: white;
+  border-radius: 25px;
+}
+
+// .enviar-form .enviar-textarea-wrapper {
+//   // padding: 10px;
+//   // background-color: white;
+//   // border-radius: 25px;
+//   .mat-form-field-flex {
+//     // background: transparent;
+//   }
+// }
+
+.footer {
+  height: 10vh;
+  font-size: 10px;
+  text-align: center;
+  border-top: 1px solid lightgray;
+}
+.mat-grid-list {
+  width: 100%;
+}
+
+.new-claim-date-wrapper {
+  input {
+    width: 80%;
+    border-radius: 5px 0 0 5px;
+    height: 40px;
+    border: white;
+    font-size: 15px;
+    background-color: white;
+  }
+  .claim-date-icon {
+    .mat-icon-button {
+      width: 20%;
+      background: white;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
+
+.bg-transp {
+  background-color: transparent;
+}
+
+.enviar-form .loc-card {
+  .mat-card-header {
+    .mat-card-header-text {
+      width: 100%;
+    }
+  }
+}
+
+.p-10-30 {
+  padding: 10px 30px;
+}
+
+.menu-selected {
+  outline: none;
+  color: #2a0055;
+  // .mat-icon {
+  //   color: #27878e;
+  // }
+}
+
+.menu-not-selected {
+  outline: none;
+  color: #adacac;
+  // .mat-icon {
+  //   color: #adacac;
+  // }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+// https://material.angular.io/guide/theming
+// https://github.com/angular/components/blob/master/guides/theming.md
+
+// https://material.io/design/color/the-color-system.html
+// https://github.com/angular/material2/blob/master/src/lib/core/theming/_palette.scss
+
+// https://material.angular.io/guide/typography
+// https://github.com/Teradata/covalent/blob/develop/src/theme.scss
+
+// https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html
+// https://ultimatecourses.com/blog/the-missing-guide-to-angular-material
+
+// toastr css
+
+.custom-toast {
+  padding: unset;
+  color: #383b41 !important;
+  position: relative;
+  overflow: hidden;
+  width: 300px;
+  border-radius: 3px 3px 3px 3px;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  box-shadow: 0 0 12px #999999;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.custom-toast-message {
+  width: 100%;
+  padding-bottom: 10px;
+  text-align: left;
+  color: #383b41;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.69;
+  letter-spacing: normal;
+}
+
+.custom-toast-title {
+  width: 100%;
+  padding-bottom: 10px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.69;
+  letter-spacing: normal;
+  color: #cb7871;
+}

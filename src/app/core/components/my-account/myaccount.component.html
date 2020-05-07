@@ -1,0 +1,66 @@
+<div class="pad-2-2">
+  <mat-card class="blue-border-card">
+    <mat-grid-list cols="5" rowHeight="80px" class="full-width">
+      <mat-grid-tile colspan="1" rowspan="1">
+        <div class="mat-card-round-small" style="height: 40px; width: 40px;">
+          <mat-icon style="font-size: 30px; color: #000;"
+            >account_circle</mat-icon
+          >
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div>
+          <span class="primary-color">
+            <b>{{ userDetails.firstname }} {{ userDetails.lastname }}</b>
+          </span>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <div>
+          Balance<br />
+          <span class="primary-color">
+            <b>{{ userDetails.wallet_balance | currency: "INR" }}</b>
+          </span>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <br />
+  <h4 class="primary-color">Recent Transactions</h4>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 full-width no-shadow"
+  >
+    <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.updated_at | date: "dd MMM" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.wl_tr_type }}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.trn_amount | currency: "INR" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="mode">
+      <th mat-header-cell *matHeaderCellDef>Mode</th>
+      <td mat-cell *matCellDef="let element">{{ element.wl_tr_mode }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <br />
+  <div class="text-center">
+    <a mat-button [routerLink]="['/', 'transactions']">View All</a>
+  </div>
+</div>

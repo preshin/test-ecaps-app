@@ -1,0 +1,46 @@
+<div class="sign-in-container">
+
+    <mat-card class="sign-in-card">
+  
+
+      <mat-card-content *ngIf="formGroup" class="content-center">
+  
+          <mat-grid-list cols="1" rowHeight="6:1">
+
+                <mat-grid-tile>
+
+
+                    <mat-label>10 $</mat-label>
+                    <mat-label>Current Balance</mat-label>
+
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+
+                    <button mat-raised-button
+                    color="accent"
+                    (click)="setGoal()">
+                    {{ 'SET_GOAL' | translate }}
+                    </button>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+
+                    <button mat-raised-button
+                    color="accent"
+                     (click)="transfer()">
+              {{ 'TRANSFER' | translate }}
+            </button>
+                </mat-grid-tile>
+
+          </mat-grid-list>
+
+        <br>
+     
+       
+  
+      </mat-card-content>
+  
+    </mat-card>
+  
+  </div>

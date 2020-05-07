@@ -1,0 +1,40 @@
+<div class="p-10-30">
+    <!-- <mat-card class="blue-border-card"> -->
+    <div class="text-center">
+        <h3 class="primary-color">Datacard Recharge or Bill Payment</h3>
+      <form [formGroup]="inputForm"> 
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label class="primary-color">Datacard Number</mat-label>
+            <input matInput formControlName="cardNumber">
+            <mat-error>Enter Datacard no.</mat-error>
+        </mat-form-field> 
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group">
+        <mat-radio-button class="example-radio-button" *ngFor="let type of types" [value]="type">
+        {{type}}
+        </mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="full-width">
+            <mat-label class="primary-color">Operator</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let operator of operators" [value]="operator.value">
+                {{operator.viewValue}}
+              </mat-option>
+            </mat-select> 
+        </mat-form-field> 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label class="primary-color">Amount</mat-label>
+          <input matInput formControlName="amount">
+          <mat-error>Enter Amount</mat-error>
+        </mat-form-field>
+      </form>     
+      <button 
+      mat-raised-button 
+      color="primary" 
+      [disabled]="!inputForm.valid"
+      (click)="submit()"
+      >Proceed to Recharge</button>     
+    </div>
+  <!-- </mat-card> -->
+</div>

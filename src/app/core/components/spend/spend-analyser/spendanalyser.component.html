@@ -1,0 +1,167 @@
+<!-- <div style="height:80px"></div> -->
+<div style="padding:10px">
+  <mat-grid-list cols="1" rowHeight="25px">
+    <mat-grid-tile colspan="1" rowspan="1">
+      <div class="spend-month-select-wrapper">
+        <mat-form-field appearance="none" class="enviar-form">
+          <div class="enviar-select-wrapper">
+            <mat-select value="option1">
+              <mat-option value="option1">Sept 2019</mat-option>
+              <mat-option value="option2">Oct 2019</mat-option>
+              <mat-option value="option3">Nov 2019</mat-option>
+            </mat-select>
+          </div>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- <mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile colspan="1" rowspan="3"> -->
+  <div class="full-width">
+    <h4 class="mat-body-1">
+      Previous Months Spends
+    </h4>
+    <canvas
+      baseChart
+      style="background-color:white; border-radius: 5px; width: 100%; height: 50%"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins"
+    >
+    </canvas>
+  </div>
+</div>
+<br />
+<mat-grid-list cols="1" rowHeight="120px" [gutterSize]="'10px'">
+  <mat-grid-tile colspan="1" rowspan="1">
+    <div class="full-width" style=" height: 100%">
+      <h4
+        class="mat-body-1"
+        style="margin:unset;
+        background: lightgrey;
+        padding: 10px;"
+      >
+        Highest Category Spend
+      </h4>
+      <mat-grid-list cols="6" rowHeight="60px" style="background-color: white;">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-icon>shopping_cart</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+          <div class="full-width">Shopping</div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <b>&#8377; 1,000</b>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1" rowspan="1">
+    <div class="full-width" style=" height: 100%">
+      <h4
+        class="mat-body-1"
+        style="margin:unset;
+          background: lightgrey;
+          padding: 10px;"
+      >
+        Highest Merchant Spend
+      </h4>
+      <mat-grid-list cols="4" rowHeight="60px" style="background-color: white;">
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+          <div class="full-width" style="padding: 010px;">
+            <div>Shopping</div>
+            <div class="mat-small">9 Oct 2019</div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <b>&#8377; 1,000</b>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<h3 class="mat-body-1" style="padding: 0 10px;">Weekly Spends</h3>
+<mat-grid-list cols="4" rowHeight="50px" class="bg-white">
+  <mat-grid-tile
+    *ngFor="let weekNumber of weeks"
+    [colspan]="weekNumber.cols"
+    [rowspan]="weekNumber.rows"
+    class="mat-body-1"
+    (click)="onWeekChange(weekNumber.weekNumber)"
+    [ngClass]="weekNumber.styleClass"
+  >
+    {{ weekNumber.text }}
+  </mat-grid-tile>
+</mat-grid-list>
+<div style="padding: 10px">
+  <div class="full-width">
+    <canvas
+      baseChart
+      style="background-color:white; border-radius: 5px; width: 100%; height: 50%"
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="barChartType"
+      [plugins]="lineChartPlugins"
+    >
+    </canvas>
+  </div>
+</div>
+<br />
+<mat-grid-list cols="1" rowHeight="120px" [gutterSize]="'10px'">
+  <mat-grid-tile colspan="1" rowspan="1">
+    <div class="full-width" style=" height: 100%">
+      <h4
+        class="mat-body-1"
+        style="margin:unset;
+        background: lightgrey;
+        padding: 10px;"
+      >
+        Highest Category Spend
+      </h4>
+      <mat-grid-list cols="6" rowHeight="60px" style="background-color: white;">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-icon>shopping_cart</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+          <div class="full-width">Shopping</div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <b>&#8377; 1,000</b>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1" rowspan="1">
+    <div class="full-width" style=" height: 100%">
+      <h4
+        class="mat-body-1"
+        style="margin:unset;
+          background: lightgrey;
+          padding: 10px;"
+      >
+        Highest Merchant Spend
+      </h4>
+      <mat-grid-list cols="4" rowHeight="60px" style="background-color: white;">
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+          <div class="full-width" style="padding: 010px;">
+            <div>Shopping</div>
+            <div class="mat-small">9 Oct 2019</div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <b>&#8377; 1,000</b>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

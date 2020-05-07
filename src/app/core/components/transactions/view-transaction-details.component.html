@@ -1,0 +1,24 @@
+<div class="p-10-30">
+  <mat-card class="blue-border-card">
+    <div class="text-center">
+      <h3 class="primary-color">Transaction Details</h3>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          ID : {{ viewDetails._id }}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Amount : {{ viewDetails.trn_amount | currency: "INR" }}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Type : {{ viewDetails.wl_tr_type }}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Mode : {{ viewDetails.wl_tr_mode }}
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          Date : {{ viewDetails.created_at | date: "dd MMM" }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card>
+</div>

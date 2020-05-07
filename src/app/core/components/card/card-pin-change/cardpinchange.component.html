@@ -1,0 +1,82 @@
+<!-- <div style="height:80px"></div> -->
+<div style="padding:10px">
+  <mat-grid-list cols="1" rowHeight="50" class="text-center">
+    <mat-grid-tile colspan="1" rowspan="1">
+      <h2 style="margin:unset;"><b>Change Card PIN</b></h2>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+      <div>
+        <h3>Type PIN</h3>
+        <ng-otp-input
+          (onInputChange)="onCardPinChange($event)"
+          [config]="config"
+        ></ng-otp-input>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+      <div>
+        <h3>Re-Type PIN</h3>
+        <ng-otp-input
+          (onInputChange)="onRetypeCardPinChange($event)"
+          [config]="retypeConfig"
+        ></ng-otp-input>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <br />
+  <mat-grid-list cols="3" rowHeight="50px" [gutterSize]="'10px'">
+    <mat-grid-tile colspan="1" rowspan="1">
+      <h3 style="margin-top: 10px"><b>Card Expiry</b></h3>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <div class="card-expiry-select-wrapper">
+        <mat-form-field appearance="none" class="enviar-form">
+          <div class="enviar-select-wrapper">
+            <mat-select value="option1">
+              <mat-option value="option1">Sept</mat-option>
+              <mat-option value="option2">Oct</mat-option>
+              <mat-option value="option3">Nov</mat-option>
+            </mat-select>
+          </div>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <div class="card-expiry-select-wrapper">
+        <mat-form-field appearance="none" class="enviar-form">
+          <div class="enviar-select-wrapper">
+            <mat-select value="option1">
+              <mat-option value="option1">19</mat-option>
+              <mat-option value="option2">20</mat-option>
+              <mat-option value="option3">21</mat-option>
+            </mat-select>
+          </div>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <br />
+  <mat-grid-list cols="2" rowHeight="30px" [gutterSize]="'10px'">
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width edit"
+        [routerLink]="['/', 'cards']"
+      >
+        Cancel
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width"
+        [routerLink]="['/', 'card-congrats']"
+      >
+        Submit
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

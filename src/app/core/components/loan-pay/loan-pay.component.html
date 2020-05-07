@@ -1,0 +1,35 @@
+<div class="p-10-30">
+  <!-- <mat-card class="blue-border-card"> -->
+    <div class="text-center">
+      <h3 class="primary-color">Pay Your Loan EMI</h3>            
+      <form [formGroup]="inputForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label class="primary-color">Loan Holder's Name</mat-label>
+        <input matInput formControlName="name"> 
+        <mat-error>Enter Name.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label class="primary-color">Select Your Lender</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let operator of operators" [value]="operator.value">
+            {{operator.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label class="primary-color">Loan Account Number</mat-label>
+        <input matInput formControlName="loanAccountNo">
+        <mat-error>Enter Loan Account no.</mat-error>
+      </mat-form-field>
+      </form>
+      <button 
+      mat-raised-button
+      class="full-width"
+      color="primary"
+      [disabled]="!inputForm.valid"
+      (click)="submit()"
+      >Get Payable Amount
+     </button> 
+    </div>
+  <!-- </mat-card> -->
+</div>

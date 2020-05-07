@@ -1,0 +1,49 @@
+<div style="padding: 10px;">
+  <mat-grid-list cols="1" rowHeight="80px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="full-width">
+        <div class="mat-body-1">Credit Amount:</div>
+        <div class="mat-h3">
+          <b>&#8377; 75,000</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="full-width">
+        <div class="mat-body-1">Monthly Interest</div>
+        <div class="mat-h3">
+          <b>14%</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="full-width">
+        <div class="mat-body-1">Monthly Interest Amount</div>
+        <div class="mat-h3">
+          <b>&#8377; 10,500 per month</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="full-width">
+        <div class="mat-body-1">Start Date</div>
+        <div class="mat-h3">
+          <!-- <b>{{ date | date: "dd MMMM yyyy" }}</b>-->
+          <b>1st Jan 2020</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <br />
+  <button
+    mat-raised-button
+    color="primary"
+    class="full-width"
+    [routerLink]="['/', 'loc-congrats']"
+  >
+    Take Credit
+  </button>
+  <p class="mat-small">
+    By clicking on the "Take Credit" button I am agreeing to the T&C
+  </p>
+</div>

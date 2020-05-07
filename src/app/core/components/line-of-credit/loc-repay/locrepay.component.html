@@ -1,0 +1,75 @@
+<div style="padding: 10px">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="mat-body-1"
+        ><b>How much would you like to repay?</b></mat-card-title
+      >
+      <mat-card-subtitle class="mat-small">
+        Payment made will go towards paying off outstanding interest first and
+        then towards principal.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="text-center">
+      <div>
+        <h4 style="margin-top: unset;">Repayment Amount</h4>
+        <b>&#8377; {{ repaymentAmount | number }}</b>
+        <div>
+          <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            min="0"
+            [max]="total"
+            step="100"
+            (input)="onInputChange($event)"
+            style="width: 80%;"
+          ></mat-slider>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <br />
+  <mat-grid-list cols="2" rowHeight="30px">
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <h3 class="mat-body-1" style="margin: unset;">
+        Revised loan amounts
+      </h3>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="2">
+      <div class="full-width text-center">
+        <p class="mat-small">Total OutStanding</p>
+        <div class="mat-body-1">
+          <!-- <b>&#8377; {{ 85500 | number }}</b> -->
+          <b>&#8377; {{ totalAmount | number }}</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <div class="full-width text-center">
+        <p class="mat-small">Principal OutStanding</p>
+        <div class="mat-body-1">
+          <!-- <b>&#8377; {{ 75000 | number }}</b> -->
+          <b>&#8377; {{ principalAmount | number }}</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <div class="full-width text-center">
+        <p class="mat-small">Interest OutStanding</p>
+        <div class="mat-body-1">
+          <!-- <b>&#8377; {{ 10500 | number }}</b> -->
+          <b>&#8377; {{ interestAmount | number }}</b>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <br />
+  <button
+    mat-raised-button
+    color="primary"
+    class="full-width"
+    [routerLink]="['/', 'loc-congrats']"
+  >
+    Make Payment
+  </button>
+</div>

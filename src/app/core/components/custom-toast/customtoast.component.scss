@@ -1,0 +1,27 @@
+:host {
+  // background-color: #ff69b4;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 10px 10px 10px 10px;
+  width: 300px;
+  border-radius: 3px 3px 3px 3px;
+  color: #383b41;
+  pointer-events: all;
+  cursor: pointer;
+}
+.btn-pink {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+
+// .toast-warning .toast-error .toast-info .toast-success {
+//   background-color: #f89406;
+//   background-image: unset;
+// }
+
+.toast-close {
+  box-shadow: unset !important;
+  // width: 80%;
+}

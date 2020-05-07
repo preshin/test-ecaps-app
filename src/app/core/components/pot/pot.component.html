@@ -1,0 +1,62 @@
+<div style="height:15px"></div>
+<div style="padding:10px">
+
+  <mat-grid-list  cols="1" rowHeight="150px" class="full-width">
+    <mat-grid-tile>    
+      <div class="mat-card-round-big"></div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+    <mat-card>
+        <mat-grid-list  cols="4" rowHeight="80px" class="full-width">
+          <mat-grid-tile colspan="1"
+          rowspan="1">
+          <div class="mat-card-round-small"></div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2"
+            rowspan="1">
+            <div class="new-line"><b class="body-2">Main Account</b><br><span class="mat-caption">6253xxxxxx272</span></div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"
+            rowspan="1">
+            <div class="new-line"><span class="mat-caption">Balance</span><br><b>&#8377; 2,400</b></div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card>
+    <br>
+    <mat-grid-list cols="2"  class="full-width"  rowHeight="120px" [gutterSize]="'10px'">
+      
+        <mat-grid-tile
+        
+        *ngFor="let tile of tiles"
+
+          [colspan]="tile.cols"
+          [rowspan]="tile.rows"
+      >
+            <mat-card>
+              <mat-grid-list  cols="2"  rowHeight="80px" class="full-width">
+                    <mat-grid-tile colspan="1"
+                    rowspan="1">
+                    <div class="mat-card-round-small">20%</div>
+                  </mat-grid-tile>
+                    <mat-grid-tile colspan="1"
+                      rowspan="1">
+                      <div [routerLink]="['/', 'viewpot']" class="new-line"><b>{{tile.category}}</b><div class="spacer"></div><span class="mat-caption">Balance</span><br><b>&#8377; 653</b></div>
+                    </mat-grid-tile>
+                     
+                </mat-grid-list>
+
+
+            </mat-card>
+        </mat-grid-tile>
+       
+    </mat-grid-list>
+
+    <br>
+    
+    <button mat-raised-button color="primary" class="full-width"  [routerLink]="['/','create']" >Create new pot</button>
+
+
+</div>
+  

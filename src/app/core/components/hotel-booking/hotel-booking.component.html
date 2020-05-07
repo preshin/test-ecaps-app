@@ -1,0 +1,40 @@
+<div class="p-10-30">
+  <!-- <mat-card class="blue-border-card"> -->
+    <div class="text-center">
+      <h3 class="primary-color">Hotel Booking</h3>
+      <form [formGroup]="inputForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label class="primary-color">Destination</mat-label>
+          <input matInput formControlName="destination"> 
+          <mat-error>Enter Destination</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label class="primary-color">Check In</mat-label>
+          <input matInput [matDatepicker]="picker1" [formControl]="checkIn">
+          <mat-error>Select Check In Date</mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field> 
+        <mat-form-field class="full-width">
+          <mat-label class="primary-color">Check out</mat-label>
+          <input matInput [matDatepicker]="picker2" [formControl]="checkOut">
+          <mat-error>Select Check Out Date</mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label class="primary-color">Guest Number</mat-label>
+          <input matInput formControlName="guestNumber">
+          <mat-error>Enter Guest No.</mat-error>
+        </mat-form-field> 
+      </form>
+      <button 
+      mat-raised-button 
+      class="full-width"
+      color="primary"
+      [disabled]="!inputForm.valid"
+      (click)="submit()"
+      >Search</button>
+    </div>
+  <!-- </mat-card> -->
+</div>

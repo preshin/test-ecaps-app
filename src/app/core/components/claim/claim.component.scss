@@ -1,0 +1,13 @@
+.claim-tab .mat-tab-group {
+  .mat-tab-label {
+    width: 50%;
+  }
+}
+
+.tab-selected {
+  border-bottom: 2px solid black;
+}
+.tab-not-selected {
+  border-bottom: unset;
+  color: darkgrey;
+}
