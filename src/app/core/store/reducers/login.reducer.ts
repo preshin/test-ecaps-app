@@ -6,10 +6,15 @@ import {
   LOADING,
   NOT_LOADING,
   LOGIN,
+  FETCH_USER_GRAPHQL,
   RESET_STATE,
   FORGOT_PASSWORD,
   SHOW_TOAST,
+  VERIFY_EMAIL,
+  SET_PASSWORD,
+  CHILD_USERS_LIST,
   USER_EXTRA_DETAILS,
+  GET_WALLET_TRANSACTION_LIST,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -19,6 +24,7 @@ import { Router } from "@angular/router";
 import { ToastReducers } from "./toast.reducer";
 import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
 import { UserReducers } from "./user.reducer";
+import { TransactionReducers } from "./transaction.reducer";
 
 @Injectable()
 export class LoginReducers {
@@ -30,7 +36,8 @@ export class LoginReducers {
     private router: Router,
     private toast: ToastReducers,
     private resetReducer: ResetStateReducers,
-    private user: UserReducers
+    private user: UserReducers,
+    private transaction: TransactionReducers
   ) {}
 
   loginReducer(action: any) {
@@ -41,7 +48,7 @@ export class LoginReducers {
 
         console.log("IN USER LOGIN");
 
-        let defaultRedirectURL = ["myaccount"];
+        let defaultRedirectURL = ["dashboard"];
 
         //clear state
         this.resetReducer.resetState({
@@ -60,164 +67,138 @@ export class LoginReducers {
                 userInfo: _.omit(data, "token"),
               });
               localStorage.setItem("userData", JSON.stringify(data));
+              // this.user.userReducer({
+              //   type: USER_EXTRA_DETAILS,
+              //   payload: { id: data._id },
+              // });
+              // this.transaction.transactionReducer({
+              //   type: GET_WALLET_TRANSACTION_LIST,
+              // });
+
               this.router.navigate(["/", ...defaultRedirectURL]);
-              this.user.userReducer({
-                type: USER_EXTRA_DETAILS,
-                payload: { id: data._id },
-              });
 
               // this.user.userReducer({
-              //   type: USERS_LIST,
+              //   type: CHILD_USERS_LIST,
               //   payload: {
               //     id: _.get(data, "_id", null),
               //     childName: "childrenList"
               //   }
               // });
             } else {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: "Not verified.",
-              });
+              this.toast.commonCatchToast("Not Verified");
               this.router.navigate(["/sigin"]);
             }
             console.log(data);
           },
           (error) => {
-            state = this._dataStore.dataStore$.getValue();
-
-            this._dataStore.dataStore$.next({
-              ...state,
-              ...catchCommonData,
-              toastMessage: _.get(error, "message", "Something Went Wrong!!"),
-            });
+            this.toast.commonCatchToast(
+              _.get(error, "message", "Something Went Wrong!!")
+            );
           }
         );
         break;
 
-      // case FORGOT_PASSWORD:
-      //   this._loader.loadingState({ type: LOADING });
+      case FORGOT_PASSWORD:
+        this._loader.loadingState({ type: LOADING });
 
-      //   console.log("IN FORGOT_PASSWORD");
+        console.log("IN FORGOT_PASSWORD");
 
-      //   state = this._dataStore.dataStore$.getValue();
+        state = this._dataStore.dataStore$.getValue();
 
-      //   this.apiService
-      //     .get(`main/auth/forgot-password/${action.payload.email}`)
-      //     .subscribe(
-      //       (response: any) => {
-      //         if (_.get(response, "status", 500) === 200) {
-      //           this.toast.toastState({
-      //             type: SHOW_TOAST,
-      //             payload: { message: response.message, type: "success" }
-      //           });
+        this.apiService
+          .get(`main/auth/forgot-password/${action.payload.email}`, {}, false)
+          .subscribe(
+            (response: any) => {
+              if (_.get(response, "status", 500) === 200) {
+                this.toast.toastState({
+                  type: SHOW_TOAST,
+                  payload: { message: response.message, type: "success" },
+                });
 
-      //           this._dataStore.dataStore$.next({
-      //             ...state,
-      //             ...successCommonData
-      //           });
-      //           this.router.navigate(["/sigin"]);
-      //         } else {
-      //           state = this._dataStore.dataStore$.getValue();
+                this._dataStore.dataStore$.next({
+                  ...state,
+                  ...successCommonData,
+                });
+                this.router.navigate(["/sigin"]);
+              } else {
+                this.toast.commonCatchToast(
+                  _.get(response, "message", "Something Went Wrong!!")
+                );
+              }
+            },
+            (error) => {
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
+            }
+          );
+        break;
 
-      //           this._dataStore.dataStore$.next({
-      //             ...state,
-      //             ...catchCommonData,
-      //             toastMessage: _.get(
-      //               response,
-      //               "message",
-      //               "Something Went Wrong!!"
-      //             )
-      //           });
-      //         }
-      //       },
-      //       error => {
-      //         console.log(error);
+      case VERIFY_EMAIL:
+        this._loader.loadingState({ type: LOADING });
 
-      //         state = this._dataStore.dataStore$.getValue();
+        console.log("IN VERIFY_EMAIL");
 
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...catchCommonData,
-      //           toastMessage: _.get(error, "message", "Something Went Wrong!!")
-      //         });
-      //       }
-      //     );
-      //   break;
+        state = this._dataStore.dataStore$.getValue();
 
-      // case VERIFY_EMAIL:
-      //   this._loader.loadingState({ type: LOADING });
+        this.apiService
+          .verifyEmail(`main/auth/verify/${action.payload.token}`)
+          .subscribe(
+            (response: any) => {
+              console.log("responsee", response);
 
-      //   console.log("IN VERIFY_EMAIL");
+              this.toast.toastState({
+                type: SHOW_TOAST,
+                payload: { message: response.message, type: "success" },
+              });
 
-      //   state = this._dataStore.dataStore$.getValue();
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData,
+              });
+              this.router.navigate(["/sigin"]);
+            },
+            (error) => {
+              console.log("error", error);
 
-      //   this.apiService
-      //     .get(`main/auth/verify/${action.payload.token}`, {}, true)
-      //     .subscribe(
-      //       (response: any) => {
-      //         this.toast.toastState({
-      //           type: SHOW_TOAST,
-      //           payload: { message: response.message, type: "success" }
-      //         });
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
+            }
+          );
+        break;
 
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...successCommonData
-      //         });
-      //         this.router.navigate(["/sigin"]);
-      //       },
-      //       error => {
-      //         console.log(error);
+      case SET_PASSWORD:
+        this._loader.loadingState({ type: LOADING });
 
-      //         state = this._dataStore.dataStore$.getValue();
+        console.log("IN VERIFY_EMAIL");
 
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...catchCommonData,
-      //           toastMessage: _.get(error, "message", "Something Went Wrong!!")
-      //         });
-      //       }
-      //     );
-      //   break;
+        state = this._dataStore.dataStore$.getValue();
 
-      // case SET_PASSWORD:
-      //   this._loader.loadingState({ type: LOADING });
+        this.apiService
+          .post(`main/auth/verify/${action.payload.token}`, {
+            newpassword: action.payload.password,
+          })
+          .subscribe(
+            (response: any) => {
+              this.toast.toastState({
+                type: SHOW_TOAST,
+                payload: { message: response.message, type: "success" },
+              });
 
-      //   console.log("IN VERIFY_EMAIL");
-
-      //   state = this._dataStore.dataStore$.getValue();
-
-      //   this.apiService
-      //     .post(`main/auth/verify/${action.payload.token}`, {
-      //       newpassword: action.payload.password
-      //     })
-      //     .subscribe(
-      //       (response: any) => {
-      //         this.toast.toastState({
-      //           type: SHOW_TOAST,
-      //           payload: { message: response.message, type: "success" }
-      //         });
-
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...successCommonData
-      //         });
-      //         this.router.navigate(["/sigin"]);
-      //       },
-      //       error => {
-      //         console.log(error);
-
-      //         state = this._dataStore.dataStore$.getValue();
-
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...catchCommonData,
-      //           toastMessage: _.get(error, "message", "Something Went Wrong!!")
-      //         });
-      //       }
-      //     );
-      //   break;
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData,
+              });
+              this.router.navigate(["/sigin"]);
+            },
+            (error) => {
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
+            }
+          );
+        break;
 
       default:
         console.log("IN LOGIN DEFAULT");

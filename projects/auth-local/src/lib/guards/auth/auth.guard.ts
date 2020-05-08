@@ -24,7 +24,9 @@ export class LocalAuthGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(["/signin"]);
+    this.router.navigate(["/signup"], {
+      queryParams: { returnUrl: state.url }
+    });
     return false;
   }
 }

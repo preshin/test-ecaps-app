@@ -2,50 +2,53 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { Environment } from './models';
+import { Environment } from "./models";
 
 export const environment: Environment = {
-
+  apiBaseURL: "https://api-stage.koppr.in",
+  restEndPoint: "/",
+  gqlEndPoint: "/ma/graphql",
+  company: "5e300e66090b676b35b87f21",
   production: false,
+  razorKey: "rzp_test_977uuSrOffIjB6",
 
-  defaultLanguage: 'en-gb', // 'en-gb', 'de-ch'
+  defaultLanguage: "en-gb", // 'en-gb', 'de-ch'
 
   isDebugMode: true,
 
   firebase: {
-    apiKey: '',
-    authDomain: '',
-    databaseURL: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: ''
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: ""
   },
 
   okta: {
-    clientId: '',
-    grantType: 'authorization_code',
-    issuer: '',
-    redirectUri: 'http://localhost:4200/authorization-code/callback',
-    responseType: 'code',
-    scope: ['openid', 'profile', 'email', 'phone', 'address', 'groups'],
+    clientId: "",
+    grantType: "authorization_code",
+    issuer: "",
+    redirectUri: "http://localhost:4200/authorization-code/callback",
+    responseType: "code",
+    scope: ["openid", "profile", "email", "phone", "address", "groups"],
     testing: {
       disableHttpsCheck: true
     }
   },
 
   auth0: {
-    client_id: '',
-    domain: '',
-    redirect_uri: 'http://localhost:4200/authorization-code/callback',
-    scope: 'openid profile email phone address'
+    client_id: "",
+    domain: "",
+    redirect_uri: "http://localhost:4200/authorization-code/callback",
+    scope: "openid profile email phone address"
   },
 
-  storageUriPrefix: 'https://firebasestorage.googleapis.com/v0/b/',
+  storageUriPrefix: "https://firebasestorage.googleapis.com/v0/b/",
 
-  version: '1.0.0-beta.1',
+  version: "1.0.0-beta.1",
 
-  sentryDsn: ''
-
+  sentryDsn: ""
 };
 
 // https://github.com/PatrickJS/angular-starter/blob/master/src/environments/environment.ts

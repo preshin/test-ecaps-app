@@ -11,9 +11,11 @@ import { LoginReducers } from "@app/core/store/reducers/login.reducer";
   styleUrls: ["./signin.component.scss"],
 })
 export class SignInComponent implements OnInit, OnDestroy {
-  hide: boolean = true;
-  signInForm: FormGroup;
-
+  showPassword: boolean = false;
+  signInForm = new FormGroup({
+    email: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required]),
+  });
   constructor(
     private resetReducer: ResetStateReducers,
     private authService: AuthService,
@@ -26,33 +28,37 @@ export class SignInComponent implements OnInit, OnDestroy {
     });
 
     localStorage.setItem("token", "");
+    sessionStorage.setItem("company_id", "");
   }
-
   login() {
     if (this.signInForm.valid) {
       this.loginReducer.loginReducer({
         type: LOGIN,
         payload: {
-          email: this.signInForm.controls["userId"].value.toLowerCase(),
+          email: this.signInForm.controls["email"].value.toLowerCase(),
           password: this.signInForm.controls["password"].value,
         },
       });
     }
   }
 
+  public ngOnInit() {
+    this.logout();
+  }
+
   logout(): void {
     localStorage.setItem("userData", null);
-    localStorage.setItem("userExtraDetails", null);
+    localStorage.setItem("userExtraData", null);
     this.authService.logout("signin");
   }
 
-  public ngOnInit() {
-    this.logout();
-    this.signInForm = new FormGroup({
-      userId: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required]),
-    });
+  public ngOnDestroy() {}
+
+  togglePasswordDisplay() {
+    this.showPassword = !this.showPassword;
   }
 
-  public ngOnDestroy() {}
+  public isFormValid(formName: string) {
+    return !this.signInForm.controls[formName].errors;
+  }
 }

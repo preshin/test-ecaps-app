@@ -1,21 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { Auth } from './auth';
+import { Auth } from "./auth";
 
-import { User } from '../../models/user';
+import { User } from "../../models/user";
 
-import { LoggerService } from 'utils';
+import { LoggerService } from "utils";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthService extends Auth {
-
   constructor(private logger: LoggerService) {
-
     super();
 
-    this.logger.info('AuthService: constructor()');
+    this.logger.info("AuthService: constructor()");
   }
 
   public isAuthenticated(): boolean {
@@ -35,13 +33,14 @@ export class AuthService extends Auth {
   }
 
   public createUserWithEmailAndPassword(user: User): Promise<any> {
-
-    return Promise.reject('AuthService: createUserWithEmailAndPassword()');
+    return Promise.reject("AuthService: createUserWithEmailAndPassword()");
   }
 
-  public loginWithEmailAndPassword(username: string, password: string): Promise<any> {
-
-    return Promise.reject('AuthService: loginWithEmailAndPassword()');
+  public loginWithEmailAndPassword(
+    username: string,
+    password: string
+  ): Promise<any> {
+    return Promise.reject("AuthService: loginWithEmailAndPassword()");
   }
 
   public loginWithRedirect() {
@@ -55,18 +54,14 @@ export class AuthService extends Auth {
   // TODO -> See: collection.service.ts
 
   public getUser() {
-
     return undefined;
   }
 
   public login() {
-
     return;
   }
 
   public logout(returnUrl: string) {
-
     return;
   }
-
 }

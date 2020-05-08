@@ -9,39 +9,35 @@ import {
   HIDE_TOAST,
   TOAST_SOMETHING_WRONG
 } from "../actions";
-import { catchCommonData } from "../commondata.store";
-import * as _ from "lodash";
-import { LoggerService } from "utils";
+import { catchCommonData } from "../commonstoredata";
 
 @Injectable()
 export class ToastReducers {
-  constructor(private _dataStore: DataStore, private logger: LoggerService) {}
+  constructor(private _dataStore: DataStore) {}
 
   toastState(action: any) {
     const state = this._dataStore.dataStore$.getValue();
     switch (action.type) {
       case SHOW_TOAST:
-        this.logger.info("IN TOAST TRUE");
+        console.log("IN TOAST TRUE");
         this._dataStore.dataStore$.next({
           ...state,
           toast: true,
-          toastTitle: action.payload.title,
           toastMessage: action.payload.message,
           toastType: action.payload.type
         });
         break;
       case HIDE_TOAST:
-        this.logger.info("IN TOAST FALSE");
+        console.log("IN TOAST FALSE");
         this._dataStore.dataStore$.next({
           ...state,
           toast: false,
-          toastTitle: null,
           toastMessage: "",
-          toastType: "error"
+          toastType: action.payload
         });
         break;
       case TOAST_SOMETHING_WRONG:
-        this.logger.info("IN TOAST FALSE");
+        console.log("IN TOAST FALSE");
         this._dataStore.dataStore$.next({
           ...state,
           toast: true,
@@ -50,32 +46,23 @@ export class ToastReducers {
         });
         break;
       default:
-        this.logger.info("IN TOAST DEFAULT");
+        console.log("IN TOAST DEFAULT");
         this._dataStore.dataStore$.next({
           ...state,
           toast: false,
-          toastTitle: null,
           toastMessage: "",
-          toastType: "error"
+          toastType: action.payload
         });
     }
   }
 
-  commonCatchToast(error: { response: object }) {
+  commonCatchToast(message: string) {
     const state = this._dataStore.dataStore$.getValue();
-    const catchErrormessage = _.get(error.response, "data.error", null);
-    if (catchErrormessage)
-      this._dataStore.dataStore$.next({
-        ...state,
-        ...catchCommonData,
-        toastMessage: catchErrormessage
-      });
-    else {
-      this.toastState({ type: TOAST_SOMETHING_WRONG });
-      this._dataStore.dataStore$.next({
-        ...state,
-        loader: false
-      });
-    }
+
+    this._dataStore.dataStore$.next({
+      ...state,
+      ...catchCommonData,
+      toastMessage: message
+    });
   }
 }

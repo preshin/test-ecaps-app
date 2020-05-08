@@ -43,12 +43,18 @@
                 "glob": "**/*",
                 "input": "projects/dashboard/src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
               }
             ],
             "styles": [
               "src/styles.scss",
               "src/themes/light-theme/theme.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ng-zorro-antd/ng-zorro-antd.less",
+              "src/themes/theme.less"
             ],
             "scripts": []
           },
@@ -72,8 +78,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "10mb"
                 }
               ],
               "serviceWorker": true

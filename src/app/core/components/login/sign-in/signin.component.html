@@ -1,34 +1,102 @@
-<!-- <header-component title="Login"></header-component> -->
-<div class="p-10-30"> 
-  <div class="full-width text-center">
-    <img src="assets/images/enviar-logo.png" class="enviar-logo" alt="logo" />
-    <h2 class="primary-color">Welcome to Enviar</h2> 
-    <form [formGroup]="signInForm">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label class="primary-color">Enter Email Address</mat-label>
-        <input matInput formControlName="userId">
-        <mat-error>Enter a valid email.</mat-error>  
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label class="primary-color">Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-        <mat-error>Enter password.</mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-    </form>
-      <button
-      mat-raised-button
-      class="full-width"
-      color="primary" 
-      (click)="login()"
-      [disabled]="!signInForm.valid"
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="text-center">
+    <h1 class="primary-color-font">
+      MONEY TRANSFER & BILL PAYMENTS
+    </h1> 
+    <div nz-row class="card-div">
+      <mat-card class="primary-color-border-card">
+        <img
+          alt="example"
+          class="card-image"
+          src="assets\images\online_payment.jpg"
+      /></mat-card>
+    </div>
+    <br />
+    <div nz-row>
+      <p>
+        Need help with your Enviar Account? Get in touch
+      </p>
+      <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+        <h4 class="light-color-font">
+          <a href="tel:+918879600206">(+91) mob no.</a>
+        </h4>
+      </div>
+      <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+        <h4 class="light-color-font">
+          <a href="mailto:care@koppr.in">care@enviar.in</a>
+        </h4>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="text-center"> 
+    <h2 class="medium-color-font">
+      Sign Into Your Enviar account
+    </h2>  
+    <br> 
+    <form
+    nz-form
+    [formGroup]="signInForm"
+    class="login-form"
+    (ngSubmit)="login()"
     >
-    SIGN IN
-    </button> 
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              type="text"
+              nz-input
+              formControlName="email"
+              placeholder="Email"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="Password"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label>
+            <span>
+              <a class="medium-color-font" [routerLink]="['/', 'forgot-password']">Forgot Password?</a>
+              </span
+            >
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button  
+          class="login-form-button"
+          nz-button 
+          nzShape="round"
+          nzType="primary"
+          nzSize="size" >
+            Sign In
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label>
+            <span>
+              Don't have Enviar Account? Sign Up
+              <a class="medium-color-font">here</a>
+            </span>
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+    </form> 
     <br>
-    <br>
-    <a [routerLink]="['/', 'forgot-password']">Forgot Password?</a>
   </div>
 </div>

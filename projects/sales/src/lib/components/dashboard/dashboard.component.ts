@@ -1,26 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from "@angular/core";
 
-import { Subscription } from 'rxjs';
+import { Subscription } from "rxjs";
 
-import { SidenavService } from 'koppr-components';
+import { SidenavService } from "koppr-components";
 
-import { Dashboard, MockDashboardService } from 'dashboard';
-import { DashboardWidgetService } from 'dashboard-widgets';
+import { Dashboard, MockDashboardService } from "dashboard";
+import { DashboardWidgetService } from "dashboard-widgets";
 
-import { LoggerService } from 'utils';
+import { LoggerService } from "utils";
 
-import * as screenfull from 'screenfull';
-import { Screenfull } from 'screenfull';
+import * as screenfull from "screenfull";
+import { Screenfull } from "screenfull";
 
 @Component({
-  selector: 'sales-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: "sales-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
-  public dashboardId = '1';
-  public dashboardName = 'Sample Dashboard 1';
+  public dashboardId = "1";
+  public dashboardName = "Sample Dashboard 1";
 
   public items: Dashboard[];
 
@@ -28,28 +27,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   protected subscription: Subscription;
 
-  constructor(private commandBarSidenavService: SidenavService,
-              private dashboardService: MockDashboardService,
-              private dashboardWidgetService: DashboardWidgetService,
-              private logger: LoggerService) {}
+  constructor(
+    private commandBarSidenavService: SidenavService,
+    private dashboardService: MockDashboardService,
+    private dashboardWidgetService: DashboardWidgetService,
+    private logger: LoggerService
+  ) {}
 
   ngOnInit() {
-
-    this.logger.info('Sales DashboardComponent: ngOnInit()');
+    this.logger.info("Sales DashboardComponent: ngOnInit()");
 
     if (this.screenFull.enabled) {
+      this.logger.info(
+        "Sales DashboardComponent: Screenfull change handler registered"
+      );
 
-      this.logger.info('Sales DashboardComponent: Screenfull change handler registered');
-
-      this.screenFull.on('change', () => {
-
+      this.screenFull.on("change", () => {
         if (this.screenFull.isFullscreen) {
-          this.logger.info('Am I fullscreen? Yes');
+          this.logger.info("Am I fullscreen? Yes");
         } else {
-          this.logger.info('Am I fullscreen? No');
+          this.logger.info("Am I fullscreen? No");
         }
 
-        window.dispatchEvent(new Event('resize'));
+        window.dispatchEvent(new Event("resize"));
 
         setTimeout(() => {
           this.dashboardWidgetService.reflowWidgets();
@@ -58,34 +58,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     this.subscribe();
-
   }
 
   protected subscribe() {
+    this.logger.info("Sales DashboardComponent: subscribe()");
 
-    this.logger.info('Sales DashboardComponent: subscribe()');
-
-    this.subscription = this.dashboardService.getDashboards().subscribe(data => {
-
-      this.items = data;
-      // this.logger.info('Sales Dashboards: ' + JSON.stringify(this.items));
-
-    });
+    this.subscription = this.dashboardService
+      .getDashboards()
+      .subscribe(data => {
+        this.items = data;
+        // this.logger.info('Sales Dashboards: ' + JSON.stringify(this.items));
+      });
   }
 
   protected unsubscribe() {
-
-    this.logger.info('Sales DashboardComponent: unsubscribe()');
+    this.logger.info("Sales DashboardComponent: unsubscribe()");
 
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-
   }
 
   public ngOnDestroy() {
-
-    this.logger.info('Sales DashboardComponent: ngOnDestroy()');
+    this.logger.info("Sales DashboardComponent: ngOnDestroy()");
 
     this.unsubscribe();
   }
@@ -95,25 +90,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //
 
   public onToggleSidenav() {
-
-    this.logger.info('Sales DashboardComponent: onToggleSidenav()');
+    this.logger.info("Sales DashboardComponent: onToggleSidenav()");
 
     this.commandBarSidenavService.toggle().then(() => {
-
       if (this.commandBarSidenavService.isOpen()) {
-        this.logger.info('commandBarSidenav is open');
+        this.logger.info("commandBarSidenav is open");
       } else {
-        this.logger.info('commandBarSidenav is closed');
+        this.logger.info("commandBarSidenav is closed");
       }
 
       // this.gridster.resize();
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event("resize"));
 
       setTimeout(() => {
         this.dashboardWidgetService.reflowWidgets();
       }, 500);
     });
-
   }
 
   /*
@@ -134,13 +126,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   */
 
   public onFullscreen() {
-
-    this.logger.info('Sales DashboardComponent: onFullscreen()');
+    this.logger.info("Sales DashboardComponent: onFullscreen()");
 
     if (this.screenFull.enabled) {
       this.screenFull.toggle();
     }
-
   }
 
   //
@@ -148,15 +138,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //
 
   public onMenuClick(item: Dashboard) {
-
-    this.logger.info('Sales DashboardComponent: onMenuClick()');
+    this.logger.info("Sales DashboardComponent: onMenuClick()");
 
     this.dashboardId = item.id;
     this.dashboardName = item.name;
 
     // this.logger.info('Sales Dashboard Id: ' + this.dashboardId);
   }
-
 }
 
 // https://github.com/sindresorhus/screenfull.js/issues/126
@@ -217,7 +205,6 @@ setTimeout(() => {
   this.dashboardWidgetService.reflowWidgets();
 }, 1000);
 */
-
 
 /*
 

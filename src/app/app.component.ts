@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-
 import { LoggerService } from "utils";
 import { DataStore } from "./core/store/app.store";
 import { rootReducers } from "./core/store/reducers";

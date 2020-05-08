@@ -1,13 +1,21 @@
-.claim-tab .mat-tab-group {
-  .mat-tab-label {
-    width: 50%;
-  }
+.margin-5px {
+  margin-top: 5px;
+}
+.search-box {
+  padding: 8px;
 }
 
-.tab-selected {
-  border-bottom: 2px solid black;
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
 }
-.tab-not-selected {
-  border-bottom: unset;
-  color: darkgrey;
+
+.search-box button {
+  width: 90px;
 }
+
+.search-button {
+  margin-right: 8px;
+}
+ 

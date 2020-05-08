@@ -15,25 +15,23 @@
 // the theme object should be broken into its own file, separate from the inclusion of the mat-core and
 // angular-material-theme mixins. See: https://material.angular.io/guide/theming
 
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 
 @import "../projects/utils/src/lib/angular-material/mat-variables";
 @import "../projects/utils/src/lib/angular-material/variables";
-@import "~ngx-toastr/toastr";
 
 // top, right, bottom, and left
 // width: 100vw;
 // height: 100vh;
 
-html,
-body {
+html, body {
   // height: 100%;
   height: 100vh;
   overflow: hidden;
 }
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 // The Nav Component hosts the Sidenav container and the Sidenav content area (i.e., the router-outlet).
@@ -75,6 +73,7 @@ body {
   }
 
   background-color: #f5f5f5 !important;
+
 }
 
 // $command-bar-sidenav-width: 240px;  // menu item layout
@@ -103,6 +102,7 @@ $command-bar-sidenav-width: 160px; // card layout
   }
 
   background-color: transparent !important;
+
 }
 
 //
@@ -138,6 +138,7 @@ $command-bar-sidenav-width: 160px; // card layout
     // 56 + 0 + 84
     height: calc(100vh - 140px);
   }
+
 }
 
 .crm-component-title-container {
@@ -157,6 +158,7 @@ $command-bar-sidenav-width: 160px; // card layout
 
     margin-top: $mat-toolbar-height-mobile + $crm-command-bar-height-mobile;
   }
+
 }
 
 .crm-component-title {
@@ -253,6 +255,7 @@ $table-margin-mobile: 0;
   height: calc(100vh - 96px);
 }
 
+
 $task-list-width: 320px; // 240px;
 
 .crm-activities-container {
@@ -305,6 +308,7 @@ $task-list-width: 320px; // 240px;
   @media ($mat-xsmall) {
     height: calc(100vh - 200px);
   }
+
 }
 
 .crm-task-list-icon {
@@ -383,12 +387,11 @@ $task-list-width: 320px; // 240px;
 //
 
 .lib-component-title {
-  margin-top: $mat-toolbar-height-desktop + $crm-command-bar-height-desktop +
-    $crm-component-title-margin;
+
+  margin-top: $mat-toolbar-height-desktop + $crm-command-bar-height-desktop + $crm-component-title-margin;
 
   @media ($mat-xsmall) {
-    margin-top: $mat-toolbar-height-mobile + $crm-command-bar-height-mobile +
-      $crm-component-title-margin;
+    margin-top: $mat-toolbar-height-mobile + $crm-command-bar-height-mobile + $crm-component-title-margin;
   }
 
   margin-bottom: $crm-component-title-margin;

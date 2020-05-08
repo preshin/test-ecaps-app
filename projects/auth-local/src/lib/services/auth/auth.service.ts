@@ -9,9 +9,6 @@ import { Auth, User } from "auth";
 
 import { LoggerService } from "utils";
 
-import * as crypto from "crypto";
-import * as util from "util";
-
 interface HttpOptions {
   body?: any;
   headers?: HttpHeaders | { [header: string]: string | Array<string> };
@@ -25,18 +22,17 @@ interface HttpOptions {
 const HTTP_SERVER_ERROR_CONNECTION_REFUSED = "Connection refused";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class LocalAuthService extends Auth {
   protected readonly loginUrl =
-    "https://api-stage.paysack.com/demo/v2/session/challenge/";
+    "https://api-stage.paysack.com/koppr/v2/session/challenge/";
   protected readonly registerUrl = "http://localhost:3001/register/";
 
   protected httpOptions: HttpOptions;
 
   private userSubject: BehaviorSubject<User>;
   private user: Observable<User>;
-  private pbkdf2 = util.promisify(crypto.pbkdf2);
 
   constructor(
     private httpClient: HttpClient,
@@ -81,7 +77,7 @@ export class LocalAuthService extends Auth {
     return this.httpClient
       .post<any>(this.registerUrl, user, this.getHttpOptions())
       .pipe(
-        tap((tokens) => {
+        tap(tokens => {
           // this.accessToken = token;
           this.accessToken = tokens.access_token;
           this.idToken = tokens.id_token;
@@ -100,7 +96,7 @@ export class LocalAuthService extends Auth {
         })
       )
       .toPromise()
-      .catch((error) => {
+      .catch(error => {
         if (error === undefined) {
           error = new Error(HTTP_SERVER_ERROR_CONNECTION_REFUSED);
         }
@@ -116,62 +112,7 @@ export class LocalAuthService extends Auth {
   public async loginWithEmailAndPassword(
     username: string,
     password: string
-  ): Promise<any> {
-    const user: User = new User(username, password);
-    this.httpClient
-      .get<any>(this.loginUrl + username)
-      .pipe(
-        tap(async (session) => {
-          console.log(session);
-          let secret = session.details.pow_secret;
-          let salt = Buffer.from(session.details.pow_salt, "hex");
-          let prefix = session.details.pow_hash_prefix;
-          let key = await this.guessKey(
-            secret,
-            salt,
-            prefix,
-            session.details.pow_rounds,
-            session.details.key_length
-          );
-          let iv = crypto.randomBytes(16);
-
-          let encryptedPass = await this.encryptPassword(password, key, iv);
-          let body = {
-            refNo: iv.toString("hex"),
-            id: session._id,
-            password: encryptedPass,
-          };
-
-          this.login(username, body).subscribe((res) => {
-            console.log(res);
-
-            this.accessToken = res.token;
-            this.idToken = res.token;
-
-            this.setAccessToken(this.accessToken);
-
-            this.logger.info(
-              "LocalAuthService: loginWithEmailAndPassword() completed"
-            );
-
-            this.logger.info("tokens:" + JSON.stringify(res, null, 2));
-
-            this.userSubject.next(user);
-
-            this.authenticated = true;
-            this.router.navigate(["/feed"]);
-          });
-        })
-      )
-      .toPromise()
-      .catch((error) => {
-        if (error === undefined) {
-          error = new Error(HTTP_SERVER_ERROR_CONNECTION_REFUSED);
-        }
-
-        throw error;
-      });
-  }
+  ): Promise<any> {}
 
   public loginWithRedirect() {}
   public async handleRedirectCallback(): Promise<void> {}
@@ -204,10 +145,10 @@ export class LocalAuthService extends Auth {
     if (!this.httpOptions) {
       this.httpOptions = {
         headers: new HttpHeaders({
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         }),
         // observe: 'response',
-        params: null,
+        params: null
       };
     }
 
@@ -216,59 +157,6 @@ export class LocalAuthService extends Auth {
     // this.logger.info(JSON.stringify(this.httpOptions));
 
     return this.httpOptions;
-  }
-
-  protected async encryptPassword(
-    password: string,
-    key: Buffer,
-    iv: Buffer
-  ): Promise<string> {
-    let cipherName = "aes-256-cbc";
-
-    let cipher = crypto.createCipheriv(cipherName, key, iv);
-    cipher.setAutoPadding(true);
-    let crypted = cipher.update(password, "utf8", "hex");
-    crypted += cipher.final("hex");
-    return crypted;
-  }
-
-  protected async guessKey(
-    secretStr: string,
-    salt: Buffer,
-    prefix: string,
-    powRounds: number,
-    keyLen: number
-  ): Promise<any> {
-    // console.log("Guess key");
-    // console.log("secretStr" + secretStr);
-    // console.log("salt" + salt);
-    // console.log("prefix" + prefix);
-    // console.log("powRounds" + powRounds);
-    // console.log("keyLen" + keyLen);
-
-    let secret = Number(secretStr);
-    let found = false;
-    let key;
-    let i = 0;
-    for (i = 0; i < 200 && found == false; i++) {
-      key = await this.pbkdf2(
-        `${secret + i}`,
-        salt,
-        powRounds,
-        keyLen,
-        "sha512"
-      );
-      found = key.toString("hex").indexOf(prefix) === 0;
-
-      // console.log("key" + key.toString());
-      // console.log("found" + found);
-    }
-    !found &&
-      (() => {
-        throw new Error("Max guess limit Reached.Key could not be derived");
-      })();
-
-    return key;
   }
 
   // https://blog.angularindepth.com/expecting-the-unexpected-best-practices-for-error-handling-in-angular-21c3662ef9e4

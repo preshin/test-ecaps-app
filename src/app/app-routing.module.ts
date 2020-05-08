@@ -1,61 +1,89 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-
-//
-// Auth libs
-//
-
 import { AuthGuard } from "auth";
 
-// import { PlaceholderComponent } from "@app/core/components/placeholder/placeholder.component";
-// import { PotComponent } from "@app/core/components/pot/pot.component";
-// import { CreatePotComponent } from "@app/core/components/pot/createpot.component";
-// import { ViewPotComponent } from "@app/core/components/pot/viewpot.component";
-// import { TransferPotComponent } from "@app/core/components/pot/transferpot.component";
-// import { BalanceComponent } from "@app/core/components/pot/balance.component";
-// import { GoalComponent } from "@app/core/components/pot/goal.component";
-// import { ClaimComponent } from "@app/core/components/claim/claim.component";
-// import { NewClaimComponent } from "@app/core/components/claim/new-claim/newclaim.component";
-// import { ClaimCongratsComponent } from "@app/core/components/claim/claim-congrats/claimcongrats.component";
-// import { ClaimDetailsComponent } from "@app/core/components/claim/claim-details/claimdetails.component";
-// import { SpendComponent } from "@app/core/components/spend/spend.component";
-// import { SpendAnalyserComponent } from "@app/core/components/spend/spend-analyser/spendanalyser.component";
-// import { SpendItemComponent } from "@app/core/components/spend/spend-item/spenditem.component";
-// import { CardComponent } from "@app/core/components/card/card.component";
-// import { ActivateCardComponent } from "@app/core/components/card/activate-card/activatecard.component";
-// import { DeactivateCardComponent } from "@app/core/components/card/deactivate-card/deactivatecard.component";
-// import { CardCongratsComponent } from "@app/core/components/card/card-congrats/cardcongrats.component";
-// import { CardPinChangeComponent } from "@app/core/components/card/card-pin-change/cardpinchange.component";
-// import { TransferFromToComponent } from "@app/core/components/pot/transferfromto.component";
-// import { PotCongratsComponent } from "@app/core/components/pot/potcongrats.component";
-// import { OtpComponent } from "@app/core/components/register/otp.component";
-// import { LineOfCreditComponent } from "@app/core/components/line-of-credit/lineofcredit.component";
-// import { TakeCreditComponent } from "@app/core/components/line-of-credit/take-credit/takecredit.component";
-// import { LOCCreditConfirmComponent } from "@app/core/components/line-of-credit/loc-credit-confirm/loccreditconfirm.component";
-// import { LocCongratsComponent } from "@app/core/components/line-of-credit/loc-congrats/loccongrats.component";
-// import { LocFaqComponent } from "@app/core/components/line-of-credit/loc-faq/locfaq.component";
-// import { LocRepayComponent } from "@app/core/components/line-of-credit/loc-repay/locrepay.component";
-// import { MainLocComponent } from "@app/core/components/line-of-credit/main-loc/mainloc.component";
-
-import { MyAccountComponent } from "@app/core/components/my-account/myaccount.component";
-import { PaymentsComponent } from "@app/core/components/Payments/Payments.component";
-import { SettingsComponent } from "@app/core/components/settings/settings.component";
-import { LedgersComponent } from "@app/core/components/ledgers/ledgers.component";
-import { EarningsLoyaltyComponent } from "@app/core/components/earnings-loyalty/earnings-loyalty.component";
-import { MoneyTransferComponent } from "@app/core/components/money-transfer/money-transfer.component";
-import { MobileRechargeComponent } from "@app/core/components/mobile-recharge/mobile-recharge.component";
-import { DthRechargeComponent } from "@app/core/components/dth-recharge/dth-recharge.component";
-import { LandlineBillComponent } from "@app/core/components/landline-bill/landline-bill.component";
-import { DatacardRechargeComponent } from "@app/core/components/datacard-recharge/datacard-recharge.component";
-import { HotelBookingComponent } from "@app/core/components/hotel-booking/hotel-booking.component";
-import { LoanPayComponent } from "@app/core/components/loan-pay/loan-pay.component";
-import { AepsComponent } from "@app/core/components/aeps/aeps.component";
+import { DashboardComponent } from "@app/core/components/dashboard/dashboard.component";
 import { SignInComponent } from "@app/core/components/login/sign-in/signin.component";
-import { ForgotPasswordComponent } from "@app/core/components/login/forgot-password/forgotpassword.component";
-import { TransactionsComponent } from "@app/core/components/transactions/transactions.component";
-import { ViewTrasactionDetailsComponent } from "@app/core/components/transactions/view-transaction-details.component";
-import { VerifyMoneyTransferComponent } from "@app/core/components/money-transfer/verify-money-transfer.component";
+import { KopprSignUpComponent } from "@app/core/components/login/sign-up/signup.component";
+import { SignUpInnerComponent } from "@app/core/components/company/sign-up-inner.component";
+import { SignUpComponent } from "@app/core/components/company/sign-up.component";
+// import { AddEmployeeComponent } from "@app/core/components/employee/add-employee.component";
+// import { BulkUploadComponent } from "@app/core/components/employee/bulk-upload.component";
+// import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
+// import { BulkUploadSuccessComponent } from "@app/core/components/employee/bulk-upload-success.component";
+// import { CompanyDetailsComponent } from "@app/core/components/company/company-details.component";
+// import { BankDetailsComponent } from "@app/core/components/company/bank-details.component";
+// import { SelectPlanComponent } from "@app/core/components/company/select-plan.component";
+// import { PlanPaymentComponent } from "@app/core/components/company/plan-payment.component";
 
+// import { PaySalaryComponent } from "@app/core/components/salary/pay-salary.component";
+// import { ConfirmSalaryPaymentComponent } from "@app/core/components/salary/confirm-salary-payment.component";
+// import { SalaryPaymentResponseComponent } from "@app/core/components/salary/salary-payment-response.component";
+// import { TopUpPaymentResponseComponent } from "@app/core/components/salary/top-up-payment-response.component";
+// import { TopUpPaymentComponent } from "@app/core/components/salary/top-up-payment.component";
+// import { TopUpComponent } from "@app/core/components/salary/top-up.component";
+
+// import { PayAllowanceComponent } from "@app/core/components/allowance/pay-allowance.component";
+// import { ConfirmAllowancePaymentComponent } from "@app/core/components/allowance/confirm-allowance-payment.component";
+// import { AllowancePaymentResponseComponent } from "@app/core/components/allowance/allowance-payment-response.component";
+// import { AllowanceTopUpPaymentResponseComponent } from "@app/core/components/allowance/top-up-payment-response.component";
+// import { AllowanceTopUpPaymentComponent } from "@app/core/components/allowance/top-up-payment.component";
+// import { AllowanceTopUpComponent } from "@app/core/components/allowance/top-up.component";
+// import { AllowanceComponent } from "@app/core/components/allowance/allowance.component";
+// import { KopprAccountDetailsComponent } from "@app/core/components/account/koppr-account-details.component";
+// import { UserComponent } from "@app/core/components/account/user.component";
+// import { AddNewUserComponent } from "@app/core/components/account/addnewuser.component";
+// import { UserDetailsComponent } from "@app/core/components/account/userdetails.component";
+
+// import { ViewPotComponent } from "@app/core/components/dashboard/viewpot.component";
+// import { TransferPotComponent } from "@app/core/components/dashboard/transferpot.component";
+// import { SalaryComponent } from "@app/core/components/salary/salary.component";
+
+// import { GoalComponent } from "@app/core/components/dashboard/goal.component";
+
+// import { ClaimComponent } from "@app/core/components/claim/claim.component";
+// import { ClaimDetailsComponent } from "@app/core/components/claim/claim-details.component";
+// import { ClaimApprovedComponent } from "@app/core/components/claim/claim-approved.component";
+// import { ClaimRejectedComponent } from "@app/core/components/claim/claim-rejected.component";
+// import { SpendComponent } from "@app/core/components/spend/spend.component";
+// import { CardComponent } from "@app/core/components/card/card.component";
+// import { TransferFromToComponent } from "@app/core/components/dashboard/transferfromto.component";
+// import { PotCongratsComponent } from "@app/core/components/dashboard/potcongrats.component";
+// import { EmployeeAddTypeSelectionComponent } from "@app/core/components/employee/employee-add-type-selection.component";
+// import { ListComponent } from "@app/core/components/employee/list.component";
+// import { CompanyListComponent } from "./core/components/company/companylist.component";
+// import { DepositComponent } from "./core/components/company/deposit.component";
+// import { TopupApprovalComponent } from "./core/components/company/topup-approval.component";
+
+import { SuperDistributorComponent } from "@app/core/components/super-distributor/super-distributor.component";
+import { AddSuperDistributorComponent } from "@app/core/components/super-distributor/add-super-distributor.component";
+import { DistributorComponent } from "@app/core/components/distributor/distributor.component";
+import { AddDistributorComponent } from "@app/core/components/distributor/add-distributor.component";
+import { RetailerComponent } from "@app/core/components/retailer/retailer.component";
+import { AddRetailerComponent } from "@app/core/components/retailer/add-retailer.component";
+import { LedgersComponent } from "@app/core/components/ledgers/ledgers.component";
+import { EarningsComponent } from "@app/core/components/earnings/earnings.component";
+import { TransactionsComponent } from "@app/core/components/transactions/transactions.component";
+import { WalletLoadRequestComponent } from "@app/core/components/wallet-load-request/wallet-load-request.component";
+import { ViewLoadRequestsComponent } from "@app/core/components/wallet-load-request/view-load-requests.component";
+import { WalletTopUpComponent } from "@app/core/components/wallet-top-up/wallet-top-up.component";
+import { PaymentsComponent } from "@app/core/components/payments/payments.component";
+import { ForgotPasswordComponent } from "@app/core/components/login/forgot-password/forgot-password.component";
+import { SetPasswordComponent } from "@app/core/components/login/set-password/set-password.component";
+import { VerifyEmailComponent } from "@app/core/components/login/verify-email/verify-email.component";
+import { UserAccountComponent } from "@app/core/components/user-account/user-account.component";
+import { EditAccountComponent } from "@app/core/components/user-account/edit-account.component";
+import { LoyaltyComponent } from "@app/core/components/loyalty/loyalty.component";
+import { CommissionsComponent } from "@app/core/components/commissions/commissions.component";
+import { MarginsComponent } from "./core/components/margins/margins.component";
+import { AddMarginsComponent } from "./core/components/margins/add-margins/add-margins.component";
+
+export enum menuType {
+  initialSetup = 1,
+  userRole = 2,
+  normal = 3,
+  siginin = 4,
+}
 
 const routes: Routes = [
   //
@@ -76,338 +104,471 @@ const routes: Routes = [
   //
   // Reference the lib wrapper modules using a relative path
   //
-
   {
-        path: "forgot-password",
-    component: ForgotPasswordComponent,
-    data: {
-      showFooterMenu: false,
-      showBackButton: true
-    }
-    // canActivate: [AuthGuard],
-    // runGuardsAndResolvers: "always"
+    path: "my-account",
+    component: UserAccountComponent,
+    data: { menuType: menuType.normal },
   },
   {
-        path: "signin",
+    path: "edit-account-details",
+    component: EditAccountComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "distributor",
+    component: DistributorComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "super-distributor",
+    component: SuperDistributorComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "super-distributor/add",
+    component: AddSuperDistributorComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "super-distributor/add/:id",
+    component: AddSuperDistributorComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "distributor/add",
+    component: AddDistributorComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "distributor/add/:id",
+    component: AddDistributorComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "retailer",
+    component: RetailerComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "retailer/add",
+    component: AddRetailerComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "retailer/add/:id",
+    component: AddRetailerComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "ledgers",
+    component: LedgersComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "earnings",
+    component: EarningsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "loyalty",
+    component: LoyaltyComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "commissions",
+    component: CommissionsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "transactions",
+    component: TransactionsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "wallet-load-request",
+    component: WalletLoadRequestComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "view-load-request/:id",
+    component: ViewLoadRequestsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "margins",
+    component: MarginsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "margins/add",
+    component: AddMarginsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "margins/add/:id",
+    component: AddMarginsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "wallet-top-up",
+    component: WalletTopUpComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "payments",
+    component: PaymentsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "signup",
+    component: KopprSignUpComponent,
+    data: { menuType: 4 },
+  },
+  {
+    path: "account-update",
+    component: SignUpInnerComponent,
+    data: { menuType: 4 },
+  },
+  {
+    path: "signin",
     component: SignInComponent,
-    data: {
-      showHeaderNavBar: false,
-      showFooterMenu: false
-    }
-    // canActivate: [AuthGuard],
-    // runGuardsAndResolvers: "always"
+    data: { menuType: menuType.siginin },
   },
   {
-        path: "myaccount",
-    component: MyAccountComponent
+    path: "forgot-password/:token",
+    component: SetPasswordComponent,
+    data: { menuType: menuType.siginin },
   },
   {
-        path: "payments",
-    component: PaymentsComponent
+    path: "new-password/:token",
+    component: SetPasswordComponent,
+    data: { menuType: menuType.siginin },
   },
   {
-        path: "settings",
-    component: SettingsComponent
+    path: "verify-email/:token",
+    component: VerifyEmailComponent,
+    data: { menuType: menuType.siginin },
   },
   {
-        path: "ledgers",
-    component: LedgersComponent
+    path: "forgot-password",
+    component: ForgotPasswordComponent,
+    data: { menuType: menuType.siginin },
   },
   {
-        path: "earnings-loyalty",
-    component: EarningsLoyaltyComponent
+    path: "signup",
+    component: SignUpComponent,
+    data: { menuType: menuType.siginin },
   },
   {
-        path: "money-transfer",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-        
-    component: MoneyTransferComponent
+    path: "dashboard",
+    component: DashboardComponent,
+    data: { menuType: menuType.normal },
   },
-  {
-    path: "verify-money-transfer",
-    data: {
-        showBackButton: true,
-        showFooterMenu: false
-    },
-    
-    component: VerifyMoneyTransferComponent
-  },
-  {
-        path: "money-transfer",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    
-  component: MoneyTransferComponent
-  },
-  {
-    path: "mobile-recharge",
-    data: {
-        showBackButton: true,
-        showFooterMenu: false
-    },
-
-  component: MobileRechargeComponent
-  },
-  {
-        path: "transactions",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: TransactionsComponent
-  },
-  {
-    path: "transaction-details",
-    data: {
-        showBackButton: true,
-        showFooterMenu: false
-    },
-    component: ViewTrasactionDetailsComponent
-  },
-  {
-        path: "dth-recharge",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: DthRechargeComponent
-  },
-  {
-        path: "landline-bill",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: LandlineBillComponent
-  },
-  {
-        path: "datacard-bill",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: DatacardRechargeComponent
-  },
-  {
-        path: "hotel-booking",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: HotelBookingComponent
-  },
-  {
-        path: "loan-pay",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: LoanPayComponent
-  },
-  {
-        path: "aeps",
-        data: {
-            showBackButton: true,
-            showFooterMenu: false
-        },
-    component: AepsComponent
-  },
-  {
-    path: "**",
-    redirectTo: "signin"
-  }
   // {
-  //       path: "pots",
-  //   component: PotComponent
+  //   path: "dashboard/:company_id",
+  //   component: DashboardComponent,
+  //   data: { menuType: menuType.normal }
   // },
   // {
-  //       path: "potcongrats",
+  //   path: "employee/add",
+  //   component: AddEmployeeComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "employee/add/:employeeid/:id",
+  //   component: AddEmployeeComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "employee/list/add-type-selection",
+  //   component: EmployeeAddTypeSelectionComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "employee/bulk",
+  //   component: BulkUploadComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "employee/bulk/category",
+  //   component: BulkCategoryComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "employee/list/bulkuploadsuccess",
+  //   component: BulkUploadSuccessComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "employee/list",
+  //   component: ListComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "company/signup",
+  //   component: SignUpComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "company/listing",
+  //   component: CompanyListComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+
+  // {
+  //   path: "company/listing/:company_id",
+  //   component: CompanyListComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+  // {
+  //   path: "company/companydetails",
+  //   component: CompanyDetailsComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+  // {
+  //   path: "company/bankdetails",
+  //   component: BankDetailsComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+  // {
+  //   path: "company/selectplan",
+  //   component: SelectPlanComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+  // {
+  //   path: "company/deposit",
+  //   component: DepositComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "company/topups/:company_id",
+  //   component: TopupApprovalComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+  // {
+  //   path: "company/planpayment",
+  //   component: PlanPaymentComponent,
+  //   data: { menuType: menuType.initialSetup }
+  // },
+  // {
+  //   path: "account-details/:company_id",
+  //   component: KopprAccountDetailsComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "account/user",
+  //   component: UserComponent,
+  //   data: { menuType: menuType.userRole }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "account/user/addnewuser",
+  //   component: AddNewUserComponent,
+  //   data: { menuType: menuType.userRole }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "account/user/userdetails",
+  //   component: UserDetailsComponent,
+  //   data: { menuType: menuType.userRole }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "potcongrats",
   //   component: PotCongratsComponent
   // },
   // {
-  //       path: "otp",
-  //   component: OtpComponent
+  //   path: "salary",
+  //   component: SalaryComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
   // },
   // {
-  //       path: "create",
-  //   component: CreatePotComponent
+  //   path: "salary/pay",
+  //   component: PaySalaryComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
   // },
   // {
-  //       path: "viewpot",
+  //   path: "salary/confirmsalarypayment",
+  //   component: ConfirmSalaryPaymentComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "salary/salarypaymentresponse",
+  //   component: SalaryPaymentResponseComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "salary/topuppaymentresponse",
+  //   component: TopUpPaymentResponseComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "salary/topuppayment",
+  //   component: TopUpPaymentComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "salary/topup",
+  //   component: TopUpComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance",
+  //   component: AllowanceComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance/pay",
+  //   component: PayAllowanceComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance/confirm",
+  //   component: ConfirmAllowancePaymentComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance/allowancepaymentresponse",
+  //   component: AllowancePaymentResponseComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance/topuppaymentresponse",
+  //   component: AllowanceTopUpPaymentResponseComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance/topuppayment",
+  //   component: AllowanceTopUpPaymentComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "allowance/topup",
+  //   component: AllowanceTopUpComponent,
+  //   data: { menuType: menuType.normal }
+  //   // ,
+  //   // canActivate: [AuthGuard],
+  //   // runGuardsAndResolvers: 'always'
+  // },
+  // {
+  //   path: "viewpot",
   //   component: ViewPotComponent
   //   // canActivate: [AuthGuard],
   //   // runGuardsAndResolvers: 'always'
   // },
   // {
-  //       path: "transfer",
+  //   path: "transfer",
   //   component: TransferPotComponent
   //   // ,
   //   // canActivate: [AuthGuard],
   //   // runGuardsAndResolvers: 'always'
   // },
   // {
-  //       path: "transferfromto",
+  //   path: "transferfromto",
   //   component: TransferFromToComponent
   //   // ,
   //   // canActivate: [AuthGuard],
   //   // runGuardsAndResolvers: 'always'
   // },
   // {
-  //       path: "balance",
-  //   component: BalanceComponent,
-  //   canActivate: [AuthGuard],
-  //   runGuardsAndResolvers: "always"
-  // },
-  // {
-  //       path: "goal",
+  //   path: "goal",
   //   component: GoalComponent,
   //   canActivate: [AuthGuard],
   //   runGuardsAndResolvers: "always"
   // },
 
   // {
-  //       path: "claims",
-  //   component: ClaimComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
+  //   path: "claims",
+  //   component: ClaimComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "claims/details/:id",
+  //   component: ClaimDetailsComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "claims/details/claimrejected",
+  //   component: ClaimRejectedComponent,
+  //   data: { menuType: menuType.normal }
+  // },
+  // {
+  //   path: "claims/details/claimapproved",
+  //   component: ClaimApprovedComponent,
+  //   data: { menuType: menuType.normal }
   // },
 
   // {
-  //       path: "new-claim",
-  //   component: NewClaimComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
+  //   path: "spends",
+  //   component: SpendComponent,
+  //   canActivate: [AuthGuard],
+  //   runGuardsAndResolvers: "always"
   // },
 
   // {
-  //       path: "claim-congrats",
-  //   component: ClaimCongratsComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
+  //   path: "cards",
+  //   component: CardComponent,
+  //   canActivate: [AuthGuard],
+  //   runGuardsAndResolvers: "always"
   // },
-
-  // {
-  //       path: "claim-details",
-  //   component: ClaimDetailsComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "spends",
-  //   component: SpendComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "spend-item",
-  //   component: SpendItemComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "spend-analyser",
-  //   component: SpendAnalyserComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "cards",
-  //   component: CardComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "loc-first",
-  //   component: LineOfCreditComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "take-credit",
-  //   component: TakeCreditComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "credit-confirm",
-  //   component: LOCCreditConfirmComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "loc-congrats",
-  //   component: LocCongratsComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "loc-faq",
-  //   component: LocFaqComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "loc-repay",
-  //   component: LocRepayComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "loc",
-  //   component: MainLocComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "activate-card",
-  //   component: ActivateCardComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "deactivate-card",
-  //   component: DeactivateCardComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "card-congrats",
-  //   component: CardCongratsComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-
-  // {
-  //       path: "card-pin-change",
-  //   component: CardPinChangeComponent
-  //   // canActivate: [AuthGuard],
-  //   // runGuardsAndResolvers: "always"
-  // },
-  
+  {
+    path: "**",
+    redirectTo: "signin",
+    data: { menuType: menuType.siginin },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
 

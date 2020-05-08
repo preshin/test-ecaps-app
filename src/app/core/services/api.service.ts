@@ -7,8 +7,11 @@ import {
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
+import { ModelFactory, MODEL_PATHS, SessionChallenge } from "pk-client";
 import { AuthService } from "auth";
 import * as _ from "lodash";
+import { mockData } from "./mock.service";
+import { environment } from "@env/environment";
 
 const BASE_URL = "http://159.89.168.255:5000";
 
@@ -16,6 +19,8 @@ const BASE_URL = "http://159.89.168.255:5000";
   providedIn: "root",
 })
 export class ApiService {
+  base_url = `${environment.apiBaseURL}${environment.restEndPoint}`;
+  mf: any;
   token: string = _.isEmpty(this.authService.getAccessToken())
     ? ""
     : this.authService.getAccessToken();
@@ -40,6 +45,23 @@ export class ApiService {
           "Content-Type",
           "application/x-www-form-urlencoded"
         ),
+      })
+      .pipe(
+        // retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  public verifyEmail(url: string): Observable<Object> {
+    console.log("inverifyemail");
+
+    const getUrl = `${BASE_URL}/${url}`;
+    let headers = new HttpHeaders();
+
+    headers = headers.set("Content-Type", "application/x-www-form-urlencoded");
+    return this.httpClient
+      .get<Object>(getUrl, {
+        headers,
       })
       .pipe(
         // retry(2),
@@ -128,45 +150,81 @@ export class ApiService {
       );
   }
 
-  handleError(error: HttpErrorResponse) {
-    return throwError(error);
+  public async pk_get(
+    path: string,
+    url: string,
+    params: object = {}
+  ): Promise<Object> {
+    return null;
   }
-  // public get(url: string, params: object): Observable<Object> {
-  //   return this.httpClient.get<Object>(url, { params: { ...params } }).pipe(
+
+  public async pk_post(path: string, params: object): Promise<Object> {
+    return null;
+  }
+
+  public async put(path: string, url: string, params: object): Promise<Object> {
+    return null;
+  }
+
+  // public put(url: string, params: object): Observable<Object> {
+  //   return this.httpClient.put<Object>(url, { ...params }).pipe(
   //     retry(2),
   //     catchError(this.handleError)
   //   );
   // }
 
-  // handleError(error: HttpErrorResponse) {
-  //   return throwError(error);
+  // public delete(url: string, params: object): Observable<Object> {
+  //   return this.httpClient.delete<Object>(url, { ...params }).pipe(
+  //     retry(2),
+  //     catchError(this.handleError)
+  //   );
   // }
 
-  // public post(url: string, params: object) {
-  //   this.httpClient
-  //     .post<any>(url, { params: { ...params } })
-  //     .subscribe(data => {
-  //       console.log("==============Response data======================");
-  //       console.log(data);
-  //       console.log("====================================");
-  //     });
-  // }
+  handleError(error: HttpErrorResponse) {
+    return throwError(error);
+  }
 
-  // public put(url: string, params: object) {
-  //   this.httpClient.put<any>(url, { params: { ...params } }).subscribe(data => {
-  //     console.log("==============Response data======================");
-  //     console.log(data);
-  //     console.log("====================================");
-  //   });
-  // }
+  // GraphQl
 
-  // public delete(url: string, params: object) {
-  //   this.httpClient
-  //     .delete<any>(url, { params: { ...params } })
-  //     .subscribe(data => {
-  //       console.log("==============Response data======================");
-  //       console.log(data);
-  //       console.log("====================================");
-  //     });
-  // }
+  public async query(
+    path: string,
+    url: string,
+    params: object,
+    returnData: string,
+    resolveMockData: boolean = false,
+    mockPath: string = ""
+  ): Promise<Object> {
+    const mf = new ModelFactory({
+      api_base_url: `${environment.apiBaseURL}${environment.gqlEndPoint}`,
+      token: this.authService.getAccessToken(),
+    });
+    if (!resolveMockData) {
+      return await mf.gqlclient(path).query(url, params, returnData);
+    } else {
+      return await this.resolveMockPromise(mockPath);
+    }
+  }
+
+  public async mutation(
+    path: string,
+    url: string,
+    params: object,
+    returnData: string,
+    resolveMockData: boolean = false,
+    mockPath: string = ""
+  ): Promise<Object> {
+    const mf = new ModelFactory({
+      api_base_url: `${environment.apiBaseURL}${environment.gqlEndPoint}`,
+      token: this.authService.getAccessToken(),
+    });
+    if (!resolveMockData) {
+      return await mf.gqlclient(path).mutation(url, params, returnData);
+    } else {
+      return await this.resolveMockPromise(mockPath);
+    }
+  }
+
+  async resolveMockPromise(path: string) {
+    return await new Promise((resolve) => resolve(_.get(mockData, path)));
+  }
 }
